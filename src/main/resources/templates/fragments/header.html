@@ -1,0 +1,157 @@
+<th:block xmlns:th="http://www.thymeleaf.org" th:fragment="header">
+
+    <header class="sticky top-0
+               before:absolute
+               before:inset-0
+               before:backdrop-blur-md
+               before:bg-white/90
+               dark:before:bg-gray-800/90
+               before:-z-10
+               z-30">
+
+        <div class="px-4 sm:px-6 lg:px-8">
+
+            <div class="flex items-center justify-between
+                       h-16
+                       border-b
+                       border-gray-200
+                       dark:border-gray-700/60">
+
+
+                <!-- ======================== -->
+                <!-- IZQUIERDA                -->
+                <!-- ======================== -->
+
+                <div class="flex items-center">
+
+                    <!-- ABRIR SIDEBAR EN MÓVIL -->
+
+                    <button id="sidebar-open" type="button" class="text-gray-500
+                               hover:text-gray-600
+                               dark:hover:text-gray-400
+                               lg:hidden" aria-controls="sidebar">
+
+                        <span class="sr-only">
+                            Abrir menú
+                        </span>
+
+                        <svg class="fill-current" width="24" height="24" viewBox="0 0 24 24">
+
+                            <rect x="4" y="5" width="16" height="2">
+                            </rect>
+
+                            <rect x="4" y="11" width="16" height="2">
+                            </rect>
+
+                            <rect x="4" y="17" width="16" height="2">
+                            </rect>
+
+                        </svg>
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- ======================== -->
+                <!-- DERECHA                  -->
+                <!-- ======================== -->
+
+                <div class="flex items-center space-x-3">
+
+
+                    <!-- NOTIFICACIONES -->
+
+                    <th:block th:replace="~{fragments/notifications :: notifications}">
+                    </th:block>
+
+
+
+                    <!-- CAMBIAR TEMA -->
+
+                    <button id="theme-toggle" type="button" class="relative
+                               flex items-center
+                               justify-center
+                               w-8 h-8
+                               rounded-full
+                               bg-gray-100
+                               hover:bg-gray-200
+                               dark:bg-gray-700
+                               dark:hover:bg-gray-600
+                               transition">
+
+                        <span class="sr-only">
+                            Cambiar tema
+                        </span>
+
+
+                        <!-- SOL -->
+
+                        <svg id="theme-sun" class="w-4 h-4
+                                   fill-current
+                                   text-gray-500
+                                   dark:hidden" viewBox="0 0 16 16">
+
+                            <path d="M8 12a4 4 0 1 0 0-8
+                                   4 4 0 0 0 0 8Zm0-10
+                                   a1 1 0 0 0 1-1V0
+                                   a1 1 0 0 0-2 0v1
+                                   a1 1 0 0 0 1 1Zm0 12
+                                   a1 1 0 0 0-1 1v1
+                                   a1 1 0 0 0 2 0v-1
+                                   a1 1 0 0 0-1-1ZM2 8
+                                   a1 1 0 0 0-1-1H0
+                                   a1 1 0 0 0 0 2h1
+                                   a1 1 0 0 0 1-1Zm14-1h-1
+                                   a1 1 0 0 0 0 2h1
+                                   a1 1 0 0 0 0-2Z">
+                            </path>
+
+                        </svg>
+
+
+                        <!-- LUNA -->
+
+                        <svg id="theme-moon" class="hidden
+                                   dark:block
+                                   w-4 h-4
+                                   fill-current
+                                   text-gray-300" viewBox="0 0 16 16">
+
+                            <path d="M6.2 1.3A7 7 0 1 0
+                                   14.7 9.8
+                                   6 6 0 0 1
+                                   6.2 1.3Z">
+                            </path>
+
+                        </svg>
+
+                    </button>
+
+
+
+                    <!-- SEPARADOR -->
+
+                    <div class="w-px h-6
+                               bg-gray-200
+                               dark:bg-gray-700">
+                    </div>
+
+
+
+                    <!-- USUARIO -->
+
+                    <th:block th:replace="~{fragments/user-menu :: userMenu}">
+                    </th:block>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+</th:block>

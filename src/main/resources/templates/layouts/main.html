@@ -1,0 +1,26 @@
+<th:block th:fragment="head">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scanner Aplication</title>
+    <link rel="stylesheet" th:href="@{/css/output.css}">
+    <script>
+        if (localStorage.theme === 'dark' || !('theme' in localStorage)) {
+            document.querySelector('html').classList.add('dark');
+            document.querySelector('html').style.colorScheme = 'dark';
+        } else {
+            document.querySelector('html').classList.remove('dark');
+            document.querySelector('html').style.colorScheme = 'light';
+        }        
+    </script>
+</th:block>
+<th:block th:fragment="scripts">
+
+    <script th:src="@{/js/sidebar.js}"></script>
+
+    <script th:src="@{/js/theme.js}"></script>
+
+    <script th:src="@{/js/notifications.js}"></script>
+
+    <script th:src="@{/js/user-menu.js}"></script>
+
+</th:block>

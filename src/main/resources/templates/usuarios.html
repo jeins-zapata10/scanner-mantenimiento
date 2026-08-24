@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layouts/main :: head}">
+</head>
+
+<body class="font-inter antialiased
+             bg-gray-100 dark:bg-gray-900
+             text-gray-600 dark:text-gray-400">
+
+    <div class="flex h-[100dvh] overflow-hidden">
+
+        <!-- SIDEBAR -->
+        <th:block th:replace="~{fragments/sidebar :: sidebar}">
+        </th:block>
+
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <div class="relative flex flex-col flex-1
+                overflow-y-auto overflow-x-hidden">
+
+            <!-- HEADER -->
+            <th:block th:replace="~{fragments/header :: header}">
+            </th:block>
+
+
+            <main class="grow">
+
+                <div class="px-4 sm:px-6 lg:px-8
+                        py-8
+                        w-full
+                        max-w-9xl
+                        mx-auto">
+
+
+                    <!-- TÍTULO -->
+                    <div class="mb-6">
+
+                        <h1 class="text-2xl
+                               font-bold
+                               text-gray-800
+                               dark:text-gray-100">
+
+                            Usuarios
+
+                        </h1>
+
+                        <p class="text-sm
+                              text-gray-500
+                              dark:text-gray-400
+                              mt-1">
+
+                            Consulta los usuarios registrados
+                            y su actividad dentro del sistema.
+
+                        </p>
+
+                    </div>
+
+
+                    <!-- TARJETAS RESUMEN -->
+                    <div class="grid
+                            grid-cols-1
+                            sm:grid-cols-2
+                            xl:grid-cols-4
+                            gap-4
+                            mb-6">
+
+                        <div class="bg-white
+                                dark:bg-gray-800
+                                shadow-xs
+                                rounded-xl
+                                p-4">
+
+                            <p class="text-xs
+                                  uppercase
+                                  font-medium
+                                  text-gray-400">
+
+                                Usuarios
+
+                            </p>
+
+                            <p class="text-2xl
+                                  font-bold
+                                  text-gray-800
+                                  dark:text-gray-100
+                                  mt-2">
+
+                                12
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="bg-white
+                                dark:bg-gray-800
+                                shadow-xs
+                                rounded-xl
+                                p-4">
+
+                            <p class="text-xs
+                                  uppercase
+                                  font-medium
+                                  text-gray-400">
+
+                                Activos
+
+                            </p>
+
+                            <p class="text-2xl
+                                  font-bold
+                                  text-green-600
+                                  dark:text-green-400
+                                  mt-2">
+
+                                10
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="bg-white
+                                dark:bg-gray-800
+                                shadow-xs
+                                rounded-xl
+                                p-4">
+
+                            <p class="text-xs
+                                  uppercase
+                                  font-medium
+                                  text-gray-400">
+
+                                Técnicos
+
+                            </p>
+
+                            <p class="text-2xl
+                                  font-bold
+                                  text-gray-800
+                                  dark:text-gray-100
+                                  mt-2">
+
+                                8
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="bg-white
+                                dark:bg-gray-800
+                                shadow-xs
+                                rounded-xl
+                                p-4">
+
+                            <p class="text-xs
+                                  uppercase
+                                  font-medium
+                                  text-gray-400">
+
+                                Supervisores
+
+                            </p>
+
+                            <p class="text-2xl
+                                  font-bold
+                                  text-gray-800
+                                  dark:text-gray-100
+                                  mt-2">
+
+                                2
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- FILTROS -->
+                    <div class="bg-white
+                            dark:bg-gray-800
+                            shadow-xs
+                            rounded-xl
+                            p-5
+                            mb-6">
+
+                        <div class="grid
+                                grid-cols-1
+                                md:grid-cols-3
+                                gap-4">
+
+                            <!-- BUSCAR -->
+                            <div>
+
+                                <label for="buscarUsuario" class="block
+                                          text-xs
+                                          uppercase
+                                          font-medium
+                                          text-gray-400
+                                          mb-2">
+
+                                    Buscar
+
+                                </label>
+
+                                <input id="buscarUsuario" type="text" placeholder="Nombre o correo" class="w-full
+                                          rounded-lg
+                                          border
+                                          border-gray-200
+                                          dark:border-gray-700
+                                          bg-white
+                                          dark:bg-gray-900
+                                          px-3 py-2
+                                          text-sm
+                                          outline-none
+                                          focus:border-violet-500">
+
+                            </div>
+
+
+                            <!-- ROL -->
+                            <div>
+
+                                <label for="rol" class="block
+                                          text-xs
+                                          uppercase
+                                          font-medium
+                                          text-gray-400
+                                          mb-2">
+
+                                    Rol
+
+                                </label>
+
+                                <select id="rol" class="w-full
+                                           rounded-lg
+                                           border
+                                           border-gray-200
+                                           dark:border-gray-700
+                                           bg-white
+                                           dark:bg-gray-900
+                                           px-3 py-2
+                                           text-sm">
+
+                                    <option value="">
+                                        Todos
+                                    </option>
+
+                                    <option>
+                                        Técnico
+                                    </option>
+
+                                    <option>
+                                        Supervisor
+                                    </option>
+
+                                    <option>
+                                        Administrador
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <!-- ESTADO -->
+                            <div>
+
+                                <label for="estado" class="block
+                                          text-xs
+                                          uppercase
+                                          font-medium
+                                          text-gray-400
+                                          mb-2">
+
+                                    Estado
+
+                                </label>
+
+                                <select id="estado" class="w-full
+                                           rounded-lg
+                                           border
+                                           border-gray-200
+                                           dark:border-gray-700
+                                           bg-white
+                                           dark:bg-gray-900
+                                           px-3 py-2
+                                           text-sm">
+
+                                    <option value="">
+                                        Todos
+                                    </option>
+
+                                    <option>
+                                        Activo
+                                    </option>
+
+                                    <option>
+                                        Inactivo
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- TABLA -->
+                    <div class="bg-white
+                            dark:bg-gray-800
+                            shadow-xs
+                            rounded-xl">
+
+                        <header class="px-5 py-4
+                                   border-b
+                                   border-gray-100
+                                   dark:border-gray-700/60">
+
+                            <h2 class="font-semibold
+                                   text-gray-800
+                                   dark:text-gray-100">
+
+                                Usuarios registrados
+
+                            </h2>
+
+                            <p class="text-xs
+                                  text-gray-400
+                                  mt-1">
+
+                                Personal con acceso al sistema
+
+                            </p>
+
+                        </header>
+
+
+                        <div class="overflow-x-auto">
+
+                            <table class="table-auto w-full">
+
+                                <thead class="text-xs
+                                          uppercase
+                                          text-gray-400
+                                          bg-gray-50
+                                          dark:bg-gray-700/30">
+
+                                    <tr>
+
+                                        <th class="px-5 py-3 text-left">
+                                            Usuario
+                                        </th>
+
+                                        <th class="px-5 py-3 text-left">
+                                            Correo
+                                        </th>
+
+                                        <th class="px-5 py-3 text-left">
+                                            Rol
+                                        </th>
+
+                                        <th class="px-5 py-3 text-left">
+                                            Área
+                                        </th>
+
+                                        <th class="px-5 py-3 text-left">
+                                            Estado
+                                        </th>
+
+                                        <th class="px-5 py-3 text-left">
+                                            Último acceso
+                                        </th>
+
+                                        <th class="px-5 py-3 text-right">
+                                            Acción
+                                        </th>
+
+                                    </tr>
+
+                                </thead>
+
+
+                                <tbody class="text-sm
+                                          divide-y
+                                          divide-gray-100
+                                          dark:divide-gray-700/60">
+
+
+                                    <!-- USUARIO 1 -->
+                                    <tr class="hover:bg-gray-50
+                                       dark:hover:bg-gray-700/20">
+
+                                        <td class="px-5 py-4">
+
+                                            <div class="flex items-center gap-3">
+
+                                                <div class="flex
+                                                    items-center
+                                                    justify-center
+                                                    w-9 h-9
+                                                    rounded-full
+                                                    bg-violet-500/20
+                                                    text-violet-600
+                                                    dark:text-violet-400
+                                                    font-semibold">
+
+                                                    JP
+
+                                                </div>
+
+                                                <div>
+
+                                                    <div class="font-medium
+                                                        text-gray-800
+                                                        dark:text-gray-100">
+
+                                                        Juan Pérez
+
+                                                    </div>
+
+                                                    <div class="text-xs text-gray-400">
+                                                        USR-001
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </td>
+
+
+                                        <td class="px-5 py-4">
+                                            juan.perez@empresa.com
+                                        </td>
+
+
+                                        <td class="px-5 py-4">
+
+                                            <span class="inline-flex
+                                                 px-2.5 py-0.5
+                                                 rounded-full
+                                                 text-xs
+                                                 font-medium
+                                                 bg-blue-500/20
+                                                 text-blue-700
+                                                 dark:text-blue-400">
+
+                                                Técnico
+
+                                            </span>
+
+                                        </td>
+
+
+                                        <td class="px-5 py-4">
+                                            Mantenimiento
+                                        </td>
+
+
+                                        <td class="px-5 py-4">
+
+                                            <span class="inline-flex
+                                                 px-2.5 py-0.5
+                                                 rounded-full
+                                                 text-xs
+                                                 font-medium
+                                                 bg-green-500/20
+                                                 text-green-700
+                                                 dark:text-green-400">
+
+                                                Activo
+
+                                            </span>
+
+                                        </td>
+
+
+                                        <td class="px-5 py-4">
+
+                                            <div>
+                                                22/08/2026
+                                            </div>
+
+                                            <div class="text-xs text-gray-400">
+                                                15:42
+                                            </div>
+
+                                        </td>
+
+
+                                        <td class="px-5 py-4 text-right">
+
+                                            <a th:href="@{/usuarios/1}" class="font-medium
+                                              text-violet-500
+                                              hover:text-violet-600">
+
+                                                Ver actividad
+
+                                            </a>
+
+                                        </td>
+
+                                    </tr>
+
+
+                                    <!-- USUARIO 2 -->
+                                    <tr class="hover:bg-gray-50
+                                       dark:hover:bg-gray-700/20">
+
+                                        <td class="px-5 py-4">
+
+                                            <div class="flex items-center gap-3">
+
+                                                <div class="flex
+                                                    items-center
+                                                    justify-center
+                                                    w-9 h-9
+                                                    rounded-full
+                                                    bg-violet-500/20
+                                                    text-violet-600
+                                                    dark:text-violet-400
+                                                    font-semibold">
+
+                                                    AL
+
+                                                </div>
+
+                                                <div>
+
+                                                    <div class="font-medium
+                                                        text-gray-800
+                                                        dark:text-gray-100">
+
+                                                        Ana López
+
+                                                    </div>
+
+                                                    <div class="text-xs text-gray-400">
+                                                        USR-002
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </td>
+
+
+                                        <td class="px-5 py-4">
+                                            ana.lopez@empresa.com
+                                        </td>
+
+
+                                        <td class="px-5 py-4">
+
+                                            <span class="inline-flex
+                                                 px-2.5 py-0.5
+                                                 rounded-full
+                                                 text-xs
+                                                 font-medium
+                                                 bg-blue-500/20
+                                                 text-blue-700
+                                                 dark:text-blue-400">
+
+                                                Técnico
+
+                                            </span>
+
+                                        </td>
+
+
+                                        <td class="px-5 py-4">
+                                            Mantenimiento
+                                        </td>
+
+
+                                        <td class="px-5 py-4">
+
+                                            <span class="inline-flex
+                                                 px-2.5 py-0.5
+                                                 rounded-full
+                                                 text-xs
+                                                 font-medium
+                                                 bg-green-500/20
+                                                 text-green-700
+                                                 dark:text-green-400">
+
+                                                Activo
+
+                                            </span>
+
+                                        </td>
+
+
+                                        <td class="px-5 py-4">
+
+                                            <div>
+                                                22/08/2026
+                                            </div>
+
+                                            <div class="text-xs text-gray-400">
+                                                14:18
+                                            </div>
+
+                                        </td>
+
+
+                                        <td class="px-5 py-4 text-right">
+
+                                            <a th:href="@{/usuarios/2}" class="font-medium
+                                              text-violet-500
+                                              hover:text-violet-600">
+
+                                                Ver actividad
+
+                                            </a>
+
+                                        </td>
+
+                                    </tr>
+
+
+                                    <!-- USUARIO 3 -->
+                                    <tr class="hover:bg-gray-50
+                                       dark:hover:bg-gray-700/20">
+
+                                        <td class="px-5 py-4">
+
+                                            <div class="flex items-center gap-3">
+
+                                                <div class="flex
+                                                    items-center
+                                                    justify-center
+                                                    w-9 h-9
+                                                    rounded-full
+                                                    bg-violet-500/20
+                                                    text-violet-600
+                                                    dark:text-violet-400
+                                                    font-semibold">
+
+                                                    CR
+
+                                                </div>
+
+                                                <div>
+
+                                                    <div class="font-medium
+                                                        text-gray-800
+                                                        dark:text-gray-100">
+
+                                                        Carlos Ramírez
+
+                                                    </div>
+
+                                                    <div class="text-xs text-gray-400">
+                                                        USR-003
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </td>
+
+
+                                        <td class="px-5 py-4">
+                                            carlos.ramirez@empresa.com
+                                        </td>
+
+
+                                        <td class="px-5 py-4">
+
+                                            <span class="inline-flex
+                                                 px-2.5 py-0.5
+                                                 rounded-full
+                                                 text-xs
+                                                 font-medium
+                                                 bg-violet-500/20
+                                                 text-violet-700
+                                                 dark:text-violet-400">
+
+                                                Supervisor
+
+                                            </span>
+
+                                        </td>
+
+
+                                        <td class="px-5 py-4">
+                                            Mantenimiento
+                                        </td>
+
+
+                                        <td class="px-5 py-4">
+
+                                            <span class="inline-flex
+                                                 px-2.5 py-0.5
+                                                 rounded-full
+                                                 text-xs
+                                                 font-medium
+                                                 bg-green-500/20
+                                                 text-green-700
+                                                 dark:text-green-400">
+
+                                                Activo
+
+                                            </span>
+
+                                        </td>
+
+
+                                        <td class="px-5 py-4">
+
+                                            <div>
+                                                22/08/2026
+                                            </div>
+
+                                            <div class="text-xs text-gray-400">
+                                                16:05
+                                            </div>
+
+                                        </td>
+
+
+                                        <td class="px-5 py-4 text-right">
+
+                                            <a th:href="@{/usuarios/3}" class="font-medium
+                                              text-violet-500
+                                              hover:text-violet-600">
+
+                                                Ver actividad
+
+                                            </a>
+
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </main>
+
+        </div>
+
+    </div>
+
+
+    <th:block th:replace="~{layouts/main :: scripts}">
+    </th:block>
+
+</body>
+
+</html>

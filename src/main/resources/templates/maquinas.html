@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layouts/main :: head}">
+</head>
+
+<body class="font-inter antialiased
+           bg-gray-100 dark:bg-gray-900
+           text-gray-600 dark:text-gray-400">
+
+    <div class="flex h-[100dvh] overflow-hidden">
+
+        <!-- SIDEBAR -->
+        <th:block th:replace="~{fragments/sidebar :: sidebar}">
+        </th:block>
+
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <div class="relative
+                   flex flex-col
+                   flex-1
+                   overflow-y-auto
+                   overflow-x-hidden">
+
+            <!-- HEADER -->
+            <th:block th:replace="~{fragments/header :: header}">
+            </th:block>
+
+
+            <main class="grow">
+
+                <div class="px-4 sm:px-6 lg:px-8
+                           py-8
+                           w-full
+                           max-w-9xl
+                           mx-auto">
+
+
+                    <!-- TÍTULO -->
+                    <div class="mb-8">
+
+                        <h1 class="text-2xl
+                                   font-bold
+                                   text-gray-800
+                                   dark:text-gray-100">
+
+                            Inventario de máquinas
+
+                        </h1>
+
+                        <p class="text-sm
+                                   text-gray-500
+                                   dark:text-gray-400
+                                   mt-1">
+
+                            Consulta las máquinas registradas en el sistema.
+
+                        </p>
+
+                    </div>
+
+
+                    <!-- CONTENIDO -->
+                    <div class="bg-white
+                               dark:bg-gray-800
+                               shadow-xs
+                               rounded-xl">
+
+                        <!-- CABECERA -->
+                        <div class="px-5 py-4
+                                   border-b
+                                   border-gray-100
+                                   dark:border-gray-700/60">
+
+                            <h2 class="font-semibold
+                                       text-gray-800
+                                       dark:text-gray-100">
+
+                                Máquinas
+
+                            </h2>
+
+                        </div>
+
+
+                        <!-- TABLA -->
+                        <div class="overflow-x-auto">
+
+                            <table class="table-auto w-full">
+
+                                <thead class="text-xs
+                                           uppercase
+                                           text-gray-400
+                                           bg-gray-50
+                                           dark:bg-gray-700/30">
+
+                                    <tr>
+
+                                        <th class="px-5 py-3 text-left">
+                                            Código
+                                        </th>
+
+                                        <th class="px-5 py-3 text-left">
+                                            Máquina
+                                        </th>
+
+                                        <th class="px-5 py-3 text-left">
+                                            Área
+                                        </th>
+
+                                        <th class="px-5 py-3 text-left">
+                                            Piezas
+                                        </th>
+
+                                        <th class="px-5 py-3 text-left">
+                                            Estado
+                                        </th>
+
+                                        <th class="px-5 py-3 text-right">
+                                            Acción
+                                        </th>
+
+                                    </tr>
+
+                                </thead>
+
+
+                                <tbody class="text-sm
+                                           divide-y
+                                           divide-gray-100
+                                           dark:divide-gray-700/60">
+
+
+                                    <!-- MÁQUINAS REGISTRADAS -->
+                                    <tr th:each="maquina : ${maquinas}"
+                                        class="hover:bg-gray-50 dark:hover:bg-gray-700/20">
+
+                                        <td class="px-5 py-4">
+                                            <span th:text="${maquina.codigo}">
+                                                MAQ-001
+                                            </span>
+                                        </td>
+
+
+                                        <td class="px-5 py-4
+                                                   font-medium
+                                                   text-gray-800
+                                                   dark:text-gray-100">
+
+                                            <span th:text="${maquina.nombre}">
+                                                Bomba centrifuga 01
+                                            </span>
+
+                                        </td>
+
+                                        <td class="px-5 py-4">
+                                            <span th:text="${maquina.area}">
+                                                Liquidos
+                                            </span>
+                                        </td>
+
+                                        <td class="px-5 py-4">
+                                            12
+                                        </td>
+
+                                        <td class="px-5 py-4">
+
+                                            <span class="inline-flex
+                                                       px-2.5 py-0.5
+                                                       rounded-full
+                                                       text-xs
+                                                       font-medium
+                                                       bg-green-500/20
+                                                       text-green-700
+                                                       dark:text-green-400">
+
+                                                <span th:text="${maquina.estado}">
+                                                    OPERATIVA
+                                                </span>
+
+                                            </span>
+
+                                        </td>
+
+                                        <td class="px-5 py-4 text-right">
+
+                                            <a th:href="@{/maquinas/1}" class="font-medium
+                                                       text-violet-500
+                                                       hover:text-violet-600">
+
+                                                Ver detalle
+
+                                            </a>
+
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </main>
+
+        </div>
+
+    </div>
+
+
+    <th:block th:replace="~{layouts/main :: scripts}">
+    </th:block>
+
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+{
+    "name": "PruebaWeb - Spring Boot",
+
+    "dockerComposeFile": "../compose.yaml",
+
+    "service": "app",
+
+    "workspaceFolder": "/workspaces/pruebaWeb",
+
+    "features": {
+        "ghcr.io/devcontainers/features/java:1": {
+            "version": "21",
+            "installMaven": "true",
+            "installGradle": "false"
+        },
+        "ghcr.io/devcontainers/features/node:2.1.0": {
+            "version": "22"
+        }
+    },
+
+    "forwardPorts": [
+        8080
+    ]
+}

@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layouts/main :: head}">
+</head>
+
+<body class="font-inter antialiased
+             bg-gray-100 dark:bg-gray-900
+             text-gray-600 dark:text-gray-400">
+
+    <div class="flex h-[100dvh] overflow-hidden">
+
+        <!-- SIDEBAR -->
+        <th:block th:replace="~{fragments/sidebar :: sidebar}">
+        </th:block>
+
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <div class="relative flex flex-col flex-1
+                overflow-y-auto overflow-x-hidden">
+
+            <!-- HEADER -->
+            <th:block th:replace="~{fragments/header :: header}">
+            </th:block>
+
+
+            <main class="grow">
+
+                <div class="px-4 sm:px-6 lg:px-8
+                        py-8
+                        w-full
+                        max-w-9xl
+                        mx-auto">
+
+
+                    <!-- TÍTULO -->
+                    <div class="mb-6">
+
+                        <h1 class="text-2xl
+                               font-bold
+                               text-gray-800
+                               dark:text-gray-100">
+
+                            Inspecciones
+
+                        </h1>
+
+                        <p class="text-sm
+                              text-gray-500
+                              dark:text-gray-400
+                              mt-1">
+
+                            Consulta las inspecciones realizadas
+                            realizadas sobre las piezas registradas.
+
+                        </p>
+
+                    </div>
+
+
+                    <!-- ================================ -->
+                    <!-- RESUMEN                          -->
+                    <!-- ================================ -->
+
+                    <div class="grid
+                            grid-cols-1
+                            sm:grid-cols-2
+                            xl:grid-cols-4
+                            gap-4
+                            mb-6">
+
+
+                        <!-- TOTAL -->
+                        <div class="bg-white
+                                dark:bg-gray-800
+                                shadow-xs
+                                rounded-xl
+                                p-4">
+
+                            <p class="text-xs
+                                  uppercase
+                                  font-medium
+                                  text-gray-400">
+
+                                Total inspecciones
+
+                            </p>
+
+                            <p class="text-2xl
+                                  font-bold
+                                  text-gray-800
+                                  dark:text-gray-100
+                                  mt-2">
+
+                                186
+
+                            </p>
+
+                        </div>
+
+
+                        <!-- NORMAL -->
+                        <div class="bg-white
+                                dark:bg-gray-800
+                                shadow-xs
+                                rounded-xl
+                                p-4">
+
+                            <p class="text-xs
+                                  uppercase
+                                  font-medium
+                                  text-gray-400">
+
+                                Normal
+
+                            </p>
+
+                            <p class="text-2xl
+                                  font-bold
+                                  text-green-600
+                                  dark:text-green-400
+                                  mt-2">
+
+                                171
+
+                            </p>
+
+                        </div>
+
+
+                        <!-- OBSERVACIÓN -->
+                        <div class="bg-white
+                                dark:bg-gray-800
+                                shadow-xs
+                                rounded-xl
+                                p-4">
+
+                            <p class="text-xs
+                                  uppercase
+                                  font-medium
+                                  text-gray-400">
+
+                                Con observación
+
+                            </p>
+
+                            <p class="text-2xl
+                                  font-bold
+                                  text-yellow-600
+                                  dark:text-yellow-400
+                                  mt-2">
+
+                                11
+
+                            </p>
+
+                        </div>
+
+
+                        <!-- ATENCIÓN -->
+                        <div class="bg-white
+                                dark:bg-gray-800
+                                shadow-xs
+                                rounded-xl
+                                p-4">
+
+                            <p class="text-xs
+                                  uppercase
+                                  font-medium
+                                  text-gray-400">
+
+                                Requieren atención
+
+                            </p>
+
+                            <p class="text-2xl
+                                  font-bold
+                                  text-red-600
+                                  dark:text-red-400
+                                  mt-2">
+
+                                4
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ================================ -->
+                    <!-- FILTROS                          -->
+                    <!-- ================================ -->
+
+                    <div class="bg-white
+                            dark:bg-gray-800
+                            shadow-xs
+                            rounded-xl
+                            mb-6">
+
+                        <div class="p-5">
+
+                            <div class="grid
+                                    grid-cols-1
+                                    md:grid-cols-2
+                                    xl:grid-cols-5
+                                    gap-4">
+
+
+                                <!-- BUSCAR PIEZA -->
+                                <div>
+
+                                    <label for="pieza" class="block
+                                              text-xs
+                                              font-medium
+                                              uppercase
+                                              text-gray-400
+                                              mb-2">
+
+                                        Pieza
+
+                                    </label>
+
+                                    <input id="pieza" type="text" placeholder="Código o nombre" class="w-full
+                                           rounded-lg
+                                           border
+                                           border-gray-200
+                                           dark:border-gray-700
+                                           bg-white
+                                           dark:bg-gray-900
+                                           px-3 py-2
+                                           text-sm
+                                           outline-none
+                                           focus:border-violet-500">
+
+                                </div>
+
+
+                                <!-- MÁQUINA -->
+                                <div>
+
+                                    <label for="maquina" class="block
+                                              text-xs
+                                              font-medium
+                                              uppercase
+                                              text-gray-400
+                                              mb-2">
+
+                                        Máquina
+
+                                    </label>
+
+                                    <select id="maquina" class="w-full
+                                           rounded-lg
+                                           border
+                                           border-gray-200
+                                           dark:border-gray-700
+                                           bg-white
+                                           dark:bg-gray-900
+                                           px-3 py-2
+                                           text-sm">
+
+                                        <option value="">
+                                            Todas
+                                        </option>
+
+                                        <option>
+                                            Bomba centrífuga 01
+                                        </option>
+
+                                        <option>
+                                            Motor 02
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+                                <!-- RESULTADO -->
+                                <div>
+
+                                    <label for="resultado" class="block
+                                              text-xs
+                                              font-medium
+                                              uppercase
+                                              text-gray-400
+                                              mb-2">
+
+                                        Resultado
+
+                                    </label>
+
+                                    <select id="resultado" class="w-full
+                                           rounded-lg
+                                           border
+                                           border-gray-200
+                                           dark:border-gray-700
+                                           bg-white
+                                           dark:bg-gray-900
+                                           px-3 py-2
+                                           text-sm">
+
+                                        <option value="">
+                                            Todos
+                                        </option>
+
+                                        <option>
+                                            Normal
+                                        </option>
+
+                                        <option>
+                                            Observación
+                                        </option>
+
+                                        <option>
+                                            Requiere atención
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+                                <!-- DESDE -->
+                                <div>
+
+                                    <label for="desde" class="block
+                                              text-xs
+                                              font-medium
+                                              uppercase
+                                              text-gray-400
+                                              mb-2">
+
+                                        Desde
+
+                                    </label>
+
+                                    <input id="desde" type="date" class="w-full
+                                           rounded-lg
+                                           border
+                                           border-gray-200
+                                           dark:border-gray-700
+                                           bg-white
+                                           dark:bg-gray-900
+                                           px-3 py-2
+                                           text-sm">
+
+                                </div>
+
+
+                                <!-- HASTA -->
+                                <div>
+
+                                    <label for="hasta" class="block
+                                              text-xs
+                                              font-medium
+                                              uppercase
+                                              text-gray-400
+                                              mb-2">
+
+                                        Hasta
+
+                                    </label>
+
+                                    <input id="hasta" type="date" class="w-full
+                                           rounded-lg
+                                           border
+                                           border-gray-200
+                                           dark:border-gray-700
+                                           bg-white
+                                           dark:bg-gray-900
+                                           px-3 py-2
+                                           text-sm">
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ================================ -->
+                    <!-- TABLA                            -->
+                    <!-- ================================ -->
+
+                    <div class="bg-white
+                            dark:bg-gray-800
+                            shadow-xs
+                            rounded-xl">
+
+                        <header class="px-5 py-4
+                                   border-b
+                                   border-gray-100
+                                   dark:border-gray-700/60">
+
+                            <h2 class="font-semibold
+                                   text-gray-800
+                                   dark:text-gray-100">
+
+                                Historial de inspecciones
+
+                            </h2>
+
+                            <p class="text-xs
+                                  text-gray-400
+                                  mt-1">
+
+                                Registros de inspecciones realizadas
+
+                            </p>
+
+                        </header>
+
+
+                        <div class="overflow-x-auto">
+
+                            <table class="table-auto w-full">
+
+                                <thead class="text-xs
+                                          uppercase
+                                          text-gray-400
+                                          bg-gray-50
+                                          dark:bg-gray-700/30">
+
+                                    <tr>
+
+                                        <th class="px-5 py-3 text-left">
+                                            Fecha
+                                        </th>
+
+                                        <th class="px-5 py-3 text-left">
+                                            Pieza
+                                        </th>
+
+                                        <th class="px-5 py-3 text-left">
+                                            Máquina
+                                        </th>
+
+                                        <th class="px-5 py-3 text-left">
+                                            Ronda
+                                        </th>
+
+                                        <th class="px-5 py-3 text-left">
+                                            Inspector
+                                        </th>
+
+                                        <th class="px-5 py-3 text-left">
+                                            Resultado
+                                        </th>
+
+                                        <th class="px-5 py-3 text-left">
+                                            Observación
+                                        </th>
+
+                                        <th class="px-5 py-3 text-right">
+                                            Acción
+                                        </th>
+
+                                    </tr>
+
+                                </thead>
+
+
+                                <tbody class="text-sm
+                                          divide-y
+                                          divide-gray-100
+                                          dark:divide-gray-700/60">
+
+
+                                    <!-- REGISTRO 1 -->
+                                    <tr class="hover:bg-gray-50
+                                       dark:hover:bg-gray-700/20">
+
+                                        <td class="px-5 py-4">
+                                            22/08/2026
+                                        </td>
+
+                                        <td class="px-5 py-4">
+
+                                            <div class="font-medium
+                                                text-gray-800
+                                                dark:text-gray-100">
+
+                                                Rodamiento principal
+
+                                            </div>
+
+                                            <div class="text-xs text-gray-400">
+                                                PZ-001
+                                            </div>
+
+                                        </td>
+
+                                        <td class="px-5 py-4">
+                                            Bomba centrífuga 01
+                                        </td>
+
+                                        <td class="px-5 py-4">
+
+                                            <a class="font-medium
+                                              text-violet-500
+                                              hover:text-violet-600">
+
+                                                RON-024
+
+                                            </a>
+
+                                        </td>
+
+                                        <td class="px-5 py-4">
+                                            Juan Pérez
+                                        </td>
+
+                                        <td class="px-5 py-4">
+
+                                            <span class="inline-flex
+                                                 px-2.5 py-0.5
+                                                 rounded-full
+                                                 text-xs
+                                                 font-medium
+                                                 bg-green-500/20
+                                                 text-green-700
+                                                 dark:text-green-400">
+
+                                                Normal
+
+                                            </span>
+
+                                        </td>
+
+                                        <td class="px-5 py-4">
+                                            Sin novedades.
+                                        </td>
+
+                                        <td class="px-5 py-4 text-right">
+
+                                            <a th:href="@{/piezas/1}" class="font-medium
+                                              text-violet-500
+                                              hover:text-violet-600">
+
+                                                Ver pieza
+
+                                            </a>
+
+                                        </td>
+
+                                    </tr>
+
+
+                                    <!-- REGISTRO 2 -->
+                                    <tr class="hover:bg-gray-50
+                                       dark:hover:bg-gray-700/20">
+
+                                        <td class="px-5 py-4">
+                                            22/08/2026
+                                        </td>
+
+                                        <td class="px-5 py-4">
+
+                                            <div class="font-medium
+                                                text-gray-800
+                                                dark:text-gray-100">
+
+                                                Sello mecánico
+
+                                            </div>
+
+                                            <div class="text-xs text-gray-400">
+                                                PZ-015
+                                            </div>
+
+                                        </td>
+
+                                        <td class="px-5 py-4">
+                                            Bomba centrífuga 01
+                                        </td>
+
+                                        <td class="px-5 py-4">
+
+                                            <a class="font-medium
+                                              text-violet-500">
+
+                                                RON-024
+
+                                            </a>
+
+                                        </td>
+
+                                        <td class="px-5 py-4">
+                                            Juan Pérez
+                                        </td>
+
+                                        <td class="px-5 py-4">
+
+                                            <span class="inline-flex
+                                                 px-2.5 py-0.5
+                                                 rounded-full
+                                                 text-xs
+                                                 font-medium
+                                                 bg-yellow-500/20
+                                                 text-yellow-700
+                                                 dark:text-yellow-400">
+
+                                                Observación
+
+                                            </span>
+
+                                        </td>
+
+                                        <td class="px-5 py-4">
+                                            Se observa fuga leve.
+                                        </td>
+
+                                        <td class="px-5 py-4 text-right">
+
+                                            <a th:href="@{/piezas/15}" class="font-medium
+                                              text-violet-500
+                                              hover:text-violet-600">
+
+                                                Ver pieza
+
+                                            </a>
+
+                                        </td>
+
+                                    </tr>
+
+
+                                    <!-- REGISTRO 3 -->
+                                    <tr class="hover:bg-gray-50
+                                       dark:hover:bg-gray-700/20">
+
+                                        <td class="px-5 py-4">
+                                            22/08/2026
+                                        </td>
+
+                                        <td class="px-5 py-4">
+
+                                            <div class="font-medium
+                                                text-gray-800
+                                                dark:text-gray-100">
+
+                                                Acople flexible
+
+                                            </div>
+
+                                            <div class="text-xs text-gray-400">
+                                                PZ-027
+                                            </div>
+
+                                        </td>
+
+                                        <td class="px-5 py-4">
+                                            Motor 02
+                                        </td>
+
+                                        <td class="px-5 py-4">
+
+                                            <span class="font-medium
+                                              text-violet-500">
+
+                                                RON-024
+
+                                            </span>
+
+                                        </td>
+
+                                        <td class="px-5 py-4">
+                                            Juan Pérez
+                                        </td>
+
+                                        <td class="px-5 py-4">
+
+                                            <span class="inline-flex
+                                                 px-2.5 py-0.5
+                                                 rounded-full
+                                                 text-xs
+                                                 font-medium
+                                                 bg-red-500/20
+                                                 text-red-700
+                                                 dark:text-red-400">
+
+                                                Requiere atención
+
+                                            </span>
+
+                                        </td>
+
+                                        <td class="px-5 py-4">
+                                            Desgaste visible en el acople.
+                                        </td>
+
+                                        <td class="px-5 py-4 text-right">
+
+                                            <a th:href="@{/piezas/27}" class="font-medium
+                                              text-violet-500
+                                              hover:text-violet-600">
+
+                                                Ver pieza
+
+                                            </a>
+
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </main>
+
+        </div>
+
+    </div>
+
+
+    <th:block th:replace="~{layouts/main :: scripts}">
+    </th:block>
+
+</body>
+
+</html>
