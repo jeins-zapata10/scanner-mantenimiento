@@ -1,216 +1,90 @@
 <th:block xmlns:th="http://www.thymeleaf.org" th:fragment="notifications">
-
     <div class="relative inline-flex">
+    
+<!-- ====================================================================== -->
+        <!-- Boton de notificaciones -->
+        <button id="notifications-toggle" type="button"
+            class="relative w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 transition"
+            aria-haspopup="true" aria-expanded="false">
+            <span class="sr-only"> Notificaciones </span>
 
-        <!-- BOTÓN NOTIFICACIONES -->
-        <button id="notifications-toggle" type="button" class="relative w-8 h-8
-                   flex items-center justify-center
-                   rounded-full
-                   bg-gray-100
-                   hover:bg-gray-200
-                   dark:bg-gray-700
-                   dark:hover:bg-gray-600
-                   transition" aria-haspopup="true" aria-expanded="false">
-
-            <span class="sr-only">
-                Notificaciones
-            </span>
-
-            <!-- CAMPANA -->
-            <svg class="w-4 h-4
-                       fill-current
-                       text-gray-500
-                       dark:text-gray-400" viewBox="0 0 16 16">
-
+            <!-- Icono de campaña en el menu de notificaciones -->
+            <svg class="w-4 h-4 fill-current text-gray-500 dark:text-gray-400" viewBox="0 0 16 16">
                 <path d="M9 14a1 1 0 0 1-2 0h2Zm5-2H2
                        a1 1 0 0 1-.707-1.707L2 9.586V6
                        a6 6 0 0 1 12 0v3.586l.707.707
                        A1 1 0 0 1 14 12ZM4 10h8V6
-                       a4 4 0 1 0-8 0v4Z">
-                </path>
-
+                       a4 4 0 1 0-8 0v4Z"></path>
             </svg>
 
-
-            <!-- INDICADOR -->
-            <span class="absolute top-0 right-0
-                       w-2 h-2
-                       bg-red-500
-                       border-2
-                       border-white
-                       dark:border-gray-800
-                       rounded-full">
+            <!-- Indicador de notificaciones recibidas -->
+            <span
+                class="absolute top-0 right-0 w-2 h-2 bg-red-500 border-2 border-white dark:border-gray-800 rounded-full">
             </span>
 
         </button>
-
-
-        <!-- DROPDOWN -->
-        <div id="notifications-menu" class="hidden
-                   origin-top-right
-                   z-50
-                   absolute
-                   top-full
-                   right-0
-                   w-80
-                   bg-white
-                   dark:bg-gray-800
-                   border
-                   border-gray-200
-                   dark:border-gray-700/60
-                   rounded-lg
-                   shadow-lg
-                   overflow-hidden
-                   mt-1">
-
-
-            <!-- TÍTULO -->
-            <div class="text-xs
-                       font-semibold
-                       text-gray-400
-                       dark:text-gray-500
-                       uppercase
-                       pt-3
-                       pb-2
-                       px-4">
-
+<!-- ====================================================================== -->
+        <!-- DROPDOWN Notificaciones -->
+        <div id="notifications-menu"
+            class="hidden origin-top-right z-50 absolute top-full right-0 w-80 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700/60 rounded-lg shadow-lg overflow-hidden mt-1">
+            <!-- Titulo notificaciones -->
+            <div class="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase pt-3 pb-2 px-4">
                 Notificaciones
-
             </div>
 
-
-            <!-- LISTA -->
+            <!-- Lista notificaciones (Pendiente por conectar con DB) -->
             <ul>
-
                 <!-- NOTIFICACIÓN 1 -->
-                <li class="border-t
-                           border-gray-200
-                           dark:border-gray-700/60">
-
-                    <a href="#" class="block
-                               py-2
-                               px-4
-                               hover:bg-gray-50
-                               dark:hover:bg-gray-700/50">
-
-                        <span class="block
-                                   text-sm
-                                   mb-2">
-
-                            <span class="font-medium
-                                       text-gray-800
-                                       dark:text-gray-100">
-
+                <li class="border-t border-gray-200 dark:border-gray-700/60">
+                    <a href="#" class="block py-2 px-4 hover:bg-gray-50 dark:hover:bg-gray-700/50">
+                        <span class="block text-sm mb-2">
+                            <span class="font-medium text-gray-800 dark:text-gray-100">
                                 Nuevo mantenimiento
-
                             </span>
 
                             registrado en el sistema.
-
                         </span>
 
-                        <span class="block
-                                   text-xs
-                                   font-medium
-                                   text-gray-400
-                                   dark:text-gray-500">
-
+                        <span class="block text-xs font-medium text-gray-400 dark:text-gray-500">
                             Hace 5 minutos
-
                         </span>
-
                     </a>
-
                 </li>
 
-
                 <!-- NOTIFICACIÓN 2 -->
-                <li class="border-t
-                           border-gray-200
-                           dark:border-gray-700/60">
-
-                    <a href="#" class="block
-                               py-2
-                               px-4
-                               hover:bg-gray-50
-                               dark:hover:bg-gray-700/50">
-
-                        <span class="block
-                                   text-sm
-                                   mb-2">
-
-                            <span class="font-medium
-                                       text-gray-800
-                                       dark:text-gray-100">
-
+                <li class="border-t border-gray-200 dark:border-gray-700/60">
+                    <a href="#" class="block py-2 px-4 hover:bg-gray-50 dark:hover:bg-gray-700/50">
+                        <span class="block text-sm mb-2">
+                            <span class="font-medium text-gray-800 dark:text-gray-100">
                                 Pieza actualizada
-
                             </span>
 
                             correctamente.
-
                         </span>
 
-                        <span class="block
-                                   text-xs
-                                   font-medium
-                                   text-gray-400
-                                   dark:text-gray-500">
-
+                        <span class="block text-xs font-medium text-gray-400 dark:text-gray-500">
                             Hace 20 minutos
-
                         </span>
-
                     </a>
-
                 </li>
 
-
                 <!-- NOTIFICACIÓN 3 -->
-                <li class="border-t
-                           border-gray-200
-                           dark:border-gray-700/60">
-
-                    <a href="#" class="block
-                               py-2
-                               px-4
-                               hover:bg-gray-50
-                               dark:hover:bg-gray-700/50">
-
-                        <span class="block
-                                   text-sm
-                                   mb-2">
-
-                            <span class="font-medium
-                                       text-gray-800
-                                       dark:text-gray-100">
-
+                <li class="border-t border-gray-200 dark:border-gray-700/60">
+                    <a href="#" class="block py-2 px-4 hover:bg-gray-50 dark:hover:bg-gray-700/50">
+                        <span class="block text-sm mb-2">
+                            <span class="font-medium text-gray-800 dark:text-gray-100">
                                 Máquina revisada
-
                             </span>
 
                             por mantenimiento.
-
                         </span>
 
-                        <span class="block
-                                   text-xs
-                                   font-medium
-                                   text-gray-400
-                                   dark:text-gray-500">
-
+                        <span class="block text-xs font-medium text-gray-400 dark:text-gray-500">
                             Hace 1 hora
-
                         </span>
-
                     </a>
-
                 </li>
-
             </ul>
-
         </div>
-
     </div>
-
 </th:block>

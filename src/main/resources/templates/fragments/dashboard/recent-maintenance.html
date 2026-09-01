@@ -1,251 +1,118 @@
 <th:block xmlns:th="http://www.thymeleaf.org" th:fragment="recentMaintenance">
 
-    <div class="bg-white
-               dark:bg-gray-800
-               shadow-xs
-               rounded-xl">
 
-        <!-- ENCABEZADO -->
-        <header class="px-5 py-4
-                   border-b
-                   border-gray-100
-                   dark:border-gray-700/60">
+    <!-- Informacion de mantenimiento en la vista DASHBOARD debajo de CARDS -->
 
+    <div class="bg-white dark:bg-gray-800 shadow-xs rounded-xl">
+        
+        <!-- Encabezado de la tabla mantenimiento -->
+        <header class="px-5 py-4 border-b border-gray-100 dark:border-gray-700/60">
             <div class="flex items-center justify-between">
-
                 <div>
-                    <h2 class="font-semibold
-                               text-gray-800
-                               dark:text-gray-100">
-
+                    <h2 class="font-semibold text-gray-800 dark:text-gray-100">
                         Últimos mantenimientos
-
                     </h2>
 
-                    <p class="text-sm
-                               text-gray-500
-                               dark:text-gray-400
-                               mt-1">
-
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
                         Registros recientes recibidos desde la aplicación móvil
-
                     </p>
                 </div>
 
-
                 <!-- Futuramente llevará a /mantenimientos -->
-                <a th:href="@{/mantenimientos}" class="text-sm
-                           font-medium
-                           text-violet-500
-                           hover:text-violet-600">
-
+                <a th:href="@{/mantenimientos}" class="text-sm font-medium text-violet-500 hover:text-violet-600">
                     Ver todos
-
                 </a>
-
             </div>
-
         </header>
 
-
-        <!-- TABLA RESPONSIVE -->
+        <!-- Tabla contenedora de elementos -->
         <div class="overflow-x-auto">
-
             <table class="table-auto w-full">
-
-                <thead class="text-xs
-                           uppercase
-                           text-gray-400
-                           dark:text-gray-500
-                           bg-gray-50
-                           dark:bg-gray-700/30">
-
+                <thead class="text-xs uppercase text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-700/30">
                     <tr>
+                        <th class="px-5 py-3 text-left">Pieza</th>
 
-                        <th class="px-5 py-3 text-left">
-                            Pieza
-                        </th>
+                        <th class="px-5 py-3 text-left">Máquina</th>
 
-                        <th class="px-5 py-3 text-left">
-                            Máquina
-                        </th>
+                        <th class="px-5 py-3 text-left">Fecha</th>
 
-                        <th class="px-5 py-3 text-left">
-                            Fecha
-                        </th>
+                        <th class="px-5 py-3 text-left">Tipo</th>
 
-                        <th class="px-5 py-3 text-left">
-                            Tipo
-                        </th>
-
-                        <th class="px-5 py-3 text-left">
-                            Estado
-                        </th>
-
+                        <th class="px-5 py-3 text-left">Estado</th>
                     </tr>
-
                 </thead>
 
-
-                <tbody class="text-sm
-                           divide-y
-                           divide-gray-100
-                           dark:divide-gray-700/60">
-
-
-                    <!-- REGISTRO 1 -->
-
-                    <tr class="hover:bg-gray-50
-                               dark:hover:bg-gray-700/20">
-
+                <!-- Cuerpo de la tabla contenido / Registros -->
+                <tbody class="text-sm divide-y divide-gray-100 dark:divide-gray-700/60">
+                    
+                    <!-- Registro Uno -->
+                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/20">
                         <td class="px-5 py-3">
-
-                            <div class="font-medium
-                                       text-gray-800
-                                       dark:text-gray-100">
-
+                            <div class="font-medium text-gray-800 dark:text-gray-100">
                                 PZ-001
-
                             </div>
-
                         </td>
 
-                        <td class="px-5 py-3">
-                            Bomba 01
-                        </td>
+                        <td class="px-5 py-3">Bomba 01</td>
+
+                        <td class="px-5 py-3">22/08/2026</td>
+
+                        <td class="px-5 py-3">Preventivo</td>
 
                         <td class="px-5 py-3">
-                            22/08/2026
-                        </td>
-
-                        <td class="px-5 py-3">
-                            Preventivo
-                        </td>
-
-                        <td class="px-5 py-3">
-
-                            <span class="inline-flex
-                                       font-medium
-                                       rounded-full
-                                       text-center
-                                       px-2.5
-                                       py-0.5
-                                       bg-green-500/20
-                                       text-green-700
-                                       dark:text-green-400">
-
+                            <span
+                                class="inline-flex font-medium rounded-full text-center px-2.5 py-0.5 bg-green-500/20 text-green-700 dark:text-green-400">
                                 Completado
-
                             </span>
-
                         </td>
-
                     </tr>
 
-
-                    <!-- REGISTRO 2 -->
-
-                    <tr class="hover:bg-gray-50
-                               dark:hover:bg-gray-700/20">
-
+                    <!-- Registro Dos -->
+                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/20">
                         <td class="px-5 py-3">
-
-                            <div class="font-medium
-                                       text-gray-800
-                                       dark:text-gray-100">
-
+                            <div class="font-medium text-gray-800 dark:text-gray-100">
                                 PZ-034
-
                             </div>
-
                         </td>
 
-                        <td class="px-5 py-3">
-                            Motor 02
-                        </td>
+                        <td class="px-5 py-3">Motor 02</td>
+
+                        <td class="px-5 py-3">22/08/2026</td>
+
+                        <td class="px-5 py-3">Correctivo</td>
 
                         <td class="px-5 py-3">
-                            22/08/2026
-                        </td>
-
-                        <td class="px-5 py-3">
-                            Correctivo
-                        </td>
-
-                        <td class="px-5 py-3">
-
-                            <span class="inline-flex
-                                       font-medium
-                                       rounded-full
-                                       px-2.5
-                                       py-0.5
-                                       bg-green-500/20
-                                       text-green-700
-                                       dark:text-green-400">
-
+                            <span
+                                class="inline-flex font-medium rounded-full px-2.5 py-0.5 bg-green-500/20 text-green-700 dark:text-green-400">
                                 Completado
-
                             </span>
-
                         </td>
-
                     </tr>
 
-
-                    <!-- REGISTRO 3 -->
-
-                    <tr class="hover:bg-gray-50
-                               dark:hover:bg-gray-700/20">
-
+                    <!-- Registro Tres -->
+                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/20">
                         <td class="px-5 py-3">
-
-                            <div class="font-medium
-                                       text-gray-800
-                                       dark:text-gray-100">
-
+                            <div class="font-medium text-gray-800 dark:text-gray-100">
                                 PZ-018
-
                             </div>
-
                         </td>
 
-                        <td class="px-5 py-3">
-                            Prensa 01
-                        </td>
+                        <td class="px-5 py-3">Prensa 01</td>
+
+                        <td class="px-5 py-3">21/08/2026</td>
+
+                        <td class="px-5 py-3">Inspección</td>
 
                         <td class="px-5 py-3">
-                            21/08/2026
-                        </td>
-
-                        <td class="px-5 py-3">
-                            Inspección
-                        </td>
-
-                        <td class="px-5 py-3">
-
-                            <span class="inline-flex
-                                       font-medium
-                                       rounded-full
-                                       px-2.5
-                                       py-0.5
-                                       bg-yellow-500/20
-                                       text-yellow-700
-                                       dark:text-yellow-400">
-
+                            <span
+                                class="inline-flex font-medium rounded-full px-2.5 py-0.5 bg-yellow-500/20 text-yellow-700 dark:text-yellow-400">
                                 Observación
-
                             </span>
-
                         </td>
-
                     </tr>
 
                 </tbody>
-
             </table>
-
         </div>
-
     </div>
-
 </th:block>
