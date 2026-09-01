@@ -1,4 +1,4 @@
-package com.prueba.web.controller;
+package com.scannercp.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

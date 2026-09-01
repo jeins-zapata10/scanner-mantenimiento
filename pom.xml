@@ -8,10 +8,10 @@
 		<version>4.1.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.prueba</groupId>
-	<artifactId>web</artifactId>
+	<groupId>com.scannercp</groupId>
+	<artifactId>scannercp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>web</name>
+	<name>scannercp</name>
 	<description/>
 	<url/>
 	<licenses>

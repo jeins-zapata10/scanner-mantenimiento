@@ -1,7 +1,7 @@
-package com.prueba.web.service;
+package com.scannercp.service;
 
-import com.prueba.web.model.Pieza;
-import com.prueba.web.repository.PiezaRepository;
+import com.scannercp.model.Pieza;
+import com.scannercp.repository.PiezaRepository;
 
 import org.springframework.stereotype.Service;
 

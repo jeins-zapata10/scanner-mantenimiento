@@ -1,10 +1,10 @@
-package com.prueba.web;
+package com.scannercp;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class WebApplicationTests {
+class ScannerCpApplicationTests {
 
 	@Test
 	void contextLoads() {

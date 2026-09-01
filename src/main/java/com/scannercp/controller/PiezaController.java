@@ -1,6 +1,6 @@
-package com.prueba.web.controller;
+package com.scannercp.controller;
 
-import com.prueba.web.service.PiezaService;
+import com.scannercp.service.PiezaService;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

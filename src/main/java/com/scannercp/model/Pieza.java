@@ -1,4 +1,4 @@
-package com.prueba.web.model;
+package com.scannercp.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;

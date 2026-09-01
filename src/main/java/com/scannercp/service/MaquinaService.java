@@ -1,7 +1,7 @@
-package com.prueba.web.service;
+package com.scannercp.service;
 
-import com.prueba.web.model.Maquina;
-import com.prueba.web.repository.MaquinaRepository;
+import com.scannercp.model.Maquina;
+import com.scannercp.repository.MaquinaRepository;
 
 import org.springframework.stereotype.Service;
 
