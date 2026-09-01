@@ -3,10 +3,12 @@ services:
   app:
     image: mcr.microsoft.com/devcontainers/java:3-21-bookworm
 
+    working_dir: /workspaces/scannercp
+
     command: sleep infinity
 
     volumes:
-      - .:/workspaces/pruebaWeb
+      - .:/workspaces/scannercp
 
     environment:
       MYSQL_USER: ${MYSQL_USER}
@@ -19,7 +21,7 @@ services:
 
   mysql:
     image: mysql:8.4
-    container_name: pruebaweb-mysql
+    container_name: scannercp-mysql
 
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}

@@ -5,7 +5,7 @@
 
     "service": "app",
 
-    "workspaceFolder": "/workspaces/pruebaWeb",
+    "workspaceFolder": "/workspaces/scannercp",
 
     "features": {
         "ghcr.io/devcontainers/features/java:1": {
