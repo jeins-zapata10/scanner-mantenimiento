@@ -1,5 +1,5 @@
 {
-    "name": "PruebaWeb - Spring Boot",
+    "name": "ScannerCP - Spring Boot",
 
     "dockerComposeFile": "../compose.yaml",
 
@@ -8,11 +8,6 @@
     "workspaceFolder": "/workspaces/scannercp",
 
     "features": {
-        "ghcr.io/devcontainers/features/java:1": {
-            "version": "21",
-            "installMaven": "true",
-            "installGradle": "false"
-        },
         "ghcr.io/devcontainers/features/node:2.1.0": {
             "version": "22"
         }
