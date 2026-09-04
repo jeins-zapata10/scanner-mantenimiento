@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="es"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="~{layouts/main :: head}">
 </head>
@@ -10,331 +9,313 @@
              bg-gray-100 dark:bg-gray-900
              text-gray-600 dark:text-gray-400">
 
-<div class="flex h-[100dvh] overflow-hidden">
+    <!-- Controlador condicional JS de la expansion del sidebar -->
 
 
-    <!-- SIDEBAR -->
-    <th:block th:replace="~{fragments/sidebar :: sidebar}">
-    </th:block>
+    <div class="flex h-[100dvh] overflow-hidden">
 
 
-    <div class="relative flex flex-col flex-1
-                overflow-y-auto overflow-x-hidden">
-
-
-        <!-- HEADER -->
-        <th:block th:replace="~{fragments/header :: header}">
+        <!-- SIDEBAR -->
+        <th:block th:replace="~{fragments/sidebar :: sidebar}">
         </th:block>
 
 
-        <main class="grow">
+        <div class="relative flex flex-col flex-1
+                overflow-y-auto overflow-x-hidden">
 
-            <div class="px-4 sm:px-6 lg:px-8
+
+            <!-- HEADER -->
+            <th:block th:replace="~{fragments/header :: header}">
+            </th:block>
+
+
+            <main class="grow">
+
+                <div class="px-4 sm:px-6 lg:px-8
                         py-8
                         w-full
                         max-w-4xl
                         mx-auto">
 
 
-                <!-- TÍTULO -->
+                    <!-- TÍTULO -->
 
-                <div class="mb-6">
+                    <div class="mb-6">
 
-                    <h1 class="text-2xl
+                        <h1 class="text-2xl
                                font-bold
                                text-gray-800
                                dark:text-gray-100">
 
-                        Nuevo usuario
+                            Nuevo usuario
 
-                    </h1>
+                        </h1>
 
-                    <p class="text-sm text-gray-500 mt-1">
+                        <p class="text-sm text-gray-500 mt-1">
 
-                        Registra un nuevo usuario con acceso a ScannerCP.
+                            Registra un nuevo usuario con acceso a ScannerCP.
 
-                    </p>
+                        </p>
 
-                </div>
+                    </div>
 
 
-                <!-- FORMULARIO -->
+                    <!-- FORMULARIO -->
 
-                <div class="bg-white
+                    <div class="bg-white
                             dark:bg-gray-800
                             shadow-xs
                             rounded-xl
-                            p-6">
+                            p-8
+                            md:p-10">
 
 
-                    <form th:action="@{/usuarios}"
-                          th:object="${usuarioForm}"
-                          method="post">
+                        <form action="@{/usuarios}" th:object="${usuarioForm}" method="post">
 
 
-                        <!-- ERROR GENERAL -->
+                            <!-- ERROR GENERAL -->
 
-                        <div th:if="${#fields.hasGlobalErrors()}"
-                             class="mb-5
+                            <div th:if="${#fields.hasGlobalErrors()}" class="mb-5
                                     p-4
                                     rounded-lg
                                     bg-red-50
                                     text-red-700">
 
-                            <p th:each="error : ${#fields.globalErrors()}"
-                               th:text="${error}">
-                            </p>
-
-                        </div>
-
-
-                        <div class="grid
-                                    grid-cols-1
-                                    md:grid-cols-2
-                                    gap-5">
-
-
-                            <!-- CÓDIGO -->
-
-                            <div>
-
-                                <label class="block
-                                              text-sm
-                                              font-medium
-                                              mb-2">
-
-                                    Código
-
-                                </label>
-
-                                <input type="text"
-                                       th:field="*{codigo}"
-                                       class="w-full
-                                              rounded-lg
-                                              border
-                                              border-gray-300
-                                              dark:border-gray-700
-                                              dark:bg-gray-900
-                                              px-3 py-2">
-
-                                <p th:if="${#fields.hasErrors('codigo')}"
-                                   th:errors="*{codigo}"
-                                   class="text-red-500 text-xs mt-1">
+                                <p th:each="error : ${#fields.globalErrors()}" th:text="${error}">
                                 </p>
 
                             </div>
 
 
-                            <!-- ROL -->
+                            <div class="grid
+                                    grid-cols-1
+                                    md:grid-cols-2
+                                    gap-6">
 
-                            <div>
 
-                                <label class="block
+                                <!-- CÓDIGO -->
+
+                                <div>
+
+                                    <label class="block
                                               text-sm
                                               font-medium
                                               mb-2">
 
-                                    Rol
+                                        Código
 
-                                </label>
+                                    </label>
 
-                                <select th:field="*{rol}"
-                                        class="w-full
+                                    <input type="text" th:field="*{codigo}" class="w-full
+                                              rounded-lg
+                                              border
+                                              border-gray-300
+                                              dark:border-gray-700
+                                              dark:bg-gray-900
+                                              px-4 py-3">
+
+                                    <p th:if="${#fields.hasErrors('codigo')}" th:errors="*{codigo}"
+                                        class="text-red-500 text-xs mt-1">
+                                    </p>
+
+                                </div>
+
+
+                                <!-- ROL -->
+
+                                <div>
+
+                                    <label class="block
+                                              text-sm
+                                              font-medium
+                                              mb-2">
+
+                                        Rol
+
+                                    </label>
+
+                                    <select th:field="*{rol}" class="w-full
                                                rounded-lg
                                                border
                                                border-gray-300
                                                dark:border-gray-700
                                                dark:bg-gray-900
-                                               px-3 py-2">
+                                               px-4 py-3">
 
-                                    <option value="">
-                                        Selecciona un rol
-                                    </option>
+                                        <option value="">
+                                            Selecciona un rol
+                                        </option>
 
-                                    <option th:each="rol : ${roles}"
-                                            th:value="${rol}"
-                                            th:text="${rol}">
-                                    </option>
+                                        <option th:each="rol : ${roles}" th:value="${rol}" th:text="${rol}">
+                                        </option>
 
-                                </select>
+                                    </select>
 
-                                <p th:if="${#fields.hasErrors('rol')}"
-                                   th:errors="*{rol}"
-                                   class="text-red-500 text-xs mt-1">
-                                </p>
+                                    <p th:if="${#fields.hasErrors('rol')}" th:errors="*{rol}"
+                                        class="text-red-500 text-xs mt-1">
+                                    </p>
 
-                            </div>
+                                </div>
 
 
-                            <!-- NOMBRES -->
+                                <!-- NOMBRES -->
 
-                            <div>
+                                <div>
 
-                                <label class="block
+                                    <label class="block
                                               text-sm
                                               font-medium
                                               mb-2">
 
-                                    Nombres
+                                        Nombres
 
-                                </label>
+                                    </label>
 
-                                <input type="text"
-                                       th:field="*{nombres}"
-                                       class="w-full
+                                    <input type="text" th:field="*{nombres}" class="w-full
                                               rounded-lg
                                               border
                                               border-gray-300
                                               dark:border-gray-700
                                               dark:bg-gray-900
-                                              px-3 py-2">
+                                              px-4 py-3">
 
-                                <p th:if="${#fields.hasErrors('nombres')}"
-                                   th:errors="*{nombres}"
-                                   class="text-red-500 text-xs mt-1">
-                                </p>
+                                    <p th:if="${#fields.hasErrors('nombres')}" th:errors="*{nombres}"
+                                        class="text-red-500 text-xs mt-1">
+                                    </p>
 
-                            </div>
+                                </div>
 
 
-                            <!-- APELLIDOS -->
+                                <!-- APELLIDOS -->
 
-                            <div>
+                                <div>
 
-                                <label class="block
+                                    <label class="block
                                               text-sm
                                               font-medium
                                               mb-2">
 
-                                    Apellidos
+                                        Apellidos
 
-                                </label>
+                                    </label>
 
-                                <input type="text"
-                                       th:field="*{apellidos}"
-                                       class="w-full
+                                    <input type="text" th:field="*{apellidos}" class="w-full
                                               rounded-lg
                                               border
                                               border-gray-300
                                               dark:border-gray-700
                                               dark:bg-gray-900
-                                              px-3 py-2">
+                                              px-4 py-3">
 
-                                <p th:if="${#fields.hasErrors('apellidos')}"
-                                   th:errors="*{apellidos}"
-                                   class="text-red-500 text-xs mt-1">
-                                </p>
+                                    <p th:if="${#fields.hasErrors('apellidos')}" th:errors="*{apellidos}"
+                                        class="text-red-500 text-xs mt-1">
+                                    </p>
 
-                            </div>
+                                </div>
 
 
-                            <!-- CORREO -->
+                                <!-- CORREO -->
 
-                            <div>
+                                <div>
 
-                                <label class="block
+                                    <label class="block
                                               text-sm
                                               font-medium
                                               mb-2">
 
-                                    Correo
+                                        Correo
 
-                                </label>
+                                    </label>
 
-                                <input type="email"
-                                       th:field="*{correo}"
-                                       class="w-full
+                                    <input type="email" th:field="*{correo}" class="w-full
                                               rounded-lg
                                               border
                                               border-gray-300
                                               dark:border-gray-700
                                               dark:bg-gray-900
-                                              px-3 py-2">
+                                              px-4 py-3">
 
-                                <p th:if="${#fields.hasErrors('correo')}"
-                                   th:errors="*{correo}"
-                                   class="text-red-500 text-xs mt-1">
-                                </p>
+                                    <p th:if="${#fields.hasErrors('correo')}" th:errors="*{correo}"
+                                        class="text-red-500 text-xs mt-1">
+                                    </p>
 
-                            </div>
+                                </div>
 
 
-                            <!-- PASSWORD -->
+                                <!-- PASSWORD -->
 
-                            <div>
+                                <div>
 
-                                <label class="block
+                                    <label class="block
                                               text-sm
                                               font-medium
                                               mb-2">
 
-                                    Contraseña
+                                        Contraseña
 
-                                </label>
+                                    </label>
 
-                                <input type="password"
-                                       th:field="*{password}"
-                                       class="w-full
+                                    <input type="password" th:field="*{password}" class="w-full
                                               rounded-lg
                                               border
                                               border-gray-300
                                               dark:border-gray-700
                                               dark:bg-gray-900
-                                              px-3 py-2">
+                                              px-4 py-3">
 
-                                <p th:if="${#fields.hasErrors('password')}"
-                                   th:errors="*{password}"
-                                   class="text-red-500 text-xs mt-1">
-                                </p>
+                                    <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+                                        class="text-red-500 text-xs mt-1">
+                                    </p>
+
+                                </div>
 
                             </div>
 
-                        </div>
 
+                            <!-- BOTONES -->
 
-                        <!-- BOTONES -->
-
-                        <div class="flex
+                            <div class="flex
                                     justify-end
                                     gap-3
                                     mt-8">
 
-                            <a th:href="@{/usuarios}"
-                               class="px-4 py-2
+                                <a th:href="@{/usuarios}" class="px-4 py-2
                                       rounded-lg
                                       border
                                       border-gray-300
                                       dark:border-gray-700">
 
-                                Cancelar
+                                    Cancelar
 
-                            </a>
+                                </a>
 
 
-                            <button type="submit"
-                                    class="px-4 py-2
+                                <button type="submit" class="px-4 py-2
                                            rounded-lg
                                            bg-violet-600
                                            text-white
                                            font-medium">
 
-                                Guardar usuario
+                                    Guardar usuario
 
-                            </button>
+                                </button>
 
-                        </div>
+                            </div>
 
-                    </form>
+                        </form>
+
+                    </div>
 
                 </div>
 
-            </div>
+            </main>
 
-        </main>
+        </div>
 
     </div>
 
-</div>
+    <th:block th:replace="~{layouts/main :: scripts}">
+    </th:block>
 
 </body>
 
