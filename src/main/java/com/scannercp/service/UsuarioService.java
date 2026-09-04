@@ -7,6 +7,7 @@ import com.scannercp.repository.UsuarioRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.scannercp.model.enums.RolUsuario;
 
 import java.util.List;
 import java.util.Locale;
@@ -49,6 +50,22 @@ public class UsuarioService {
 
     public boolean existePorCodigo(String codigo) {
         return usuarioRepository.existsByCodigo(codigo);
+    }
+
+    public long contarUsuarios() {
+        return usuarioRepository.count();
+    }
+
+    public long contarActivos() {
+        return usuarioRepository.countByEstado(EstadoUsuario.ACTIVO);
+    }
+
+    public long contarTecnicos() {
+        return usuarioRepository.countByRol(RolUsuario.TECNICO);
+    }
+
+    public long contarSupervisores() {
+        return usuarioRepository.countByRol(RolUsuario.SUPERVISOR);
     }
 
     @Transactional
