@@ -13,6 +13,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.bind.annotation.PathVariable;
+import com.scannercp.service.PiezaService;
+import com.scannercp.model.Maquina;
+import com.scannercp.model.Pieza;
+import java.util.HashMap;
+import java.util.Map;
 
 import java.util.List;
 
@@ -20,9 +25,11 @@ import java.util.List;
 public class MaquinaController {
 
     private final MaquinaService maquinaService;
+    private final PiezaService piezaService;
 
-    public MaquinaController(MaquinaService maquinaService) {
+    public MaquinaController(MaquinaService maquinaService, PiezaService piezaService) {
         this.maquinaService = maquinaService;
+        this.piezaService = piezaService;
     }
 
     /*
@@ -34,9 +41,36 @@ public class MaquinaController {
     @GetMapping("/maquinas")
     public String listarMaquinas(Model model) {
 
+        List<Maquina> maquinas = maquinaService.listarMaquinas();
+
+        Map<Long, Long> cantidadPiezasPorMaquina = new HashMap<>();
+
+        Map<Long, List<Pieza>> piezasPorMaquina = new HashMap<>();
+
+        for (Maquina maquina : maquinas) {
+
+            Long idMaquina = maquina.getIdMaquina();
+
+            cantidadPiezasPorMaquina.put(
+                    idMaquina,
+                    piezaService.contarPiezasPorMaquina(idMaquina));
+
+            piezasPorMaquina.put(
+                    idMaquina,
+                    piezaService.listarPiezasPorMaquina(idMaquina));
+        }
+
         model.addAttribute(
                 "maquinas",
-                maquinaService.listarMaquinas());
+                maquinas);
+
+        model.addAttribute(
+                "cantidadPiezasPorMaquina",
+                cantidadPiezasPorMaquina);
+
+        model.addAttribute(
+                "piezasPorMaquina",
+                piezasPorMaquina);
 
         return "maquinas";
     }
