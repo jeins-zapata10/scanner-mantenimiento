@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layouts/main :: head}">
+</head>
+
+<body class="font-inter antialiased
+             bg-gray-100 dark:bg-gray-900
+             text-gray-600 dark:text-gray-400">
+
+    <div class="flex h-[100dvh] overflow-hidden">
+
+        <th:block th:replace="~{fragments/sidebar :: sidebar}">
+        </th:block>
+
+        <div class="relative flex flex-col flex-1
+                overflow-y-auto overflow-x-hidden">
+
+            <th:block th:replace="~{fragments/header :: header}">
+            </th:block>
+
+            <main class="grow">
+
+                <div class="px-4 sm:px-6 lg:px-8
+                        py-8
+                        w-full
+                        max-w-4xl
+                        mx-auto">
+
+                    <div class="mb-6">
+
+                        <h1 class="text-2xl
+                               font-bold
+                               text-gray-800
+                               dark:text-gray-100">
+
+                            Nueva pieza
+
+                        </h1>
+
+                        <p class="text-sm
+                              text-gray-500
+                              dark:text-gray-400
+                              mt-1">
+
+                            Registra una pieza y asígnala a una máquina.
+
+                        </p>
+
+                    </div>
+
+
+                    <div class="bg-white
+                            dark:bg-gray-800
+                            shadow-xs
+                            rounded-xl
+                            p-8
+                            md:p-10">
+
+                        <form th:action="@{/piezas}" th:object="${piezaForm}" method="post" novalidate>
+
+
+                            <!-- ERROR GENERAL -->
+
+                            <div th:if="${#fields.hasGlobalErrors()}" class="mb-6
+                                    p-4
+                                    rounded-lg
+                                    bg-red-50
+                                    dark:bg-red-500/10
+                                    text-red-700
+                                    dark:text-red-400">
+
+                                <p th:each="error : ${#fields.globalErrors()}" th:text="${error}">
+                                </p>
+
+                            </div>
+
+
+                            <div class="grid
+                                    grid-cols-1
+                                    md:grid-cols-2
+                                    gap-6">
+
+
+                                <!-- MÁQUINA -->
+
+                                <div class="md:col-span-2">
+
+                                    <label for="idMaquina" class="block text-sm font-medium mb-2">
+
+                                        Máquina
+
+                                    </label>
+
+                                    <select id="idMaquina" th:field="*{idMaquina}" class="w-full
+                                               rounded-lg
+                                               border
+                                               border-gray-300
+                                               dark:border-gray-700
+                                               dark:bg-gray-900
+                                               px-4 py-3
+                                               outline-none
+                                               focus:border-violet-500">
+
+                                        <option value="">
+                                            Selecciona una máquina
+                                        </option>
+
+                                        <option th:each="maquina : ${maquinas}" th:value="${maquina.idMaquina}"
+                                            th:text="${maquina.codigo + ' - ' + maquina.nombre}">
+                                        </option>
+
+                                    </select>
+
+                                    <p th:if="${#fields.hasErrors('idMaquina')}" th:errors="*{idMaquina}"
+                                        class="text-red-500 text-xs mt-1">
+                                    </p>
+
+                                </div>
+
+
+                                <!-- CÓDIGO -->
+
+                                <div>
+
+                                    <label for="codigo" class="block text-sm font-medium mb-2">
+
+                                        Código de pieza
+
+                                    </label>
+
+                                    <input id="codigo" type="text" th:field="*{codigo}"
+                                        placeholder="Ejemplo: PZA-BOM-010" autocomplete="off" class="w-full
+                                              rounded-lg
+                                              border
+                                              border-gray-300
+                                              dark:border-gray-700
+                                              dark:bg-gray-900
+                                              px-4 py-3
+                                              outline-none
+                                              focus:border-violet-500">
+
+                                    <p th:if="${#fields.hasErrors('codigo')}" th:errors="*{codigo}"
+                                        class="text-red-500 text-xs mt-1">
+                                    </p>
+
+                                </div>
+
+
+                                <!-- ESTADO -->
+
+                                <div>
+
+                                    <label for="estado" class="block text-sm font-medium mb-2">
+
+                                        Estado
+
+                                    </label>
+
+                                    <select id="estado" th:field="*{estado}" class="w-full
+                                               rounded-lg
+                                               border
+                                               border-gray-300
+                                               dark:border-gray-700
+                                               dark:bg-gray-900
+                                               px-4 py-3
+                                               outline-none
+                                               focus:border-violet-500">
+
+                                        <option value="">
+                                            Selecciona un estado
+                                        </option>
+
+                                        <option th:each="estado : ${estados}" th:value="${estado}" th:text="${estado}">
+                                        </option>
+
+                                    </select>
+
+                                    <p th:if="${#fields.hasErrors('estado')}" th:errors="*{estado}"
+                                        class="text-red-500 text-xs mt-1">
+                                    </p>
+
+                                </div>
+
+
+                                <!-- NOMBRE -->
+
+                                <div>
+
+                                    <label for="nombre" class="block text-sm font-medium mb-2">
+
+                                        Nombre
+
+                                    </label>
+
+                                    <input id="nombre" type="text" th:field="*{nombre}"
+                                        placeholder="Ejemplo: Rodamiento posterior" autocomplete="off" class="w-full
+                                              rounded-lg
+                                              border
+                                              border-gray-300
+                                              dark:border-gray-700
+                                              dark:bg-gray-900
+                                              px-4 py-3
+                                              outline-none
+                                              focus:border-violet-500">
+
+                                    <p th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
+                                        class="text-red-500 text-xs mt-1">
+                                    </p>
+
+                                </div>
+
+
+                                <!-- UBICACIÓN -->
+
+                                <div>
+
+                                    <label for="ubicacion" class="block text-sm font-medium mb-2">
+
+                                        Ubicación en la máquina
+
+                                    </label>
+
+                                    <input id="ubicacion" type="text" th:field="*{ubicacion}"
+                                        placeholder="Ejemplo: Soporte posterior" autocomplete="off" class="w-full
+                                              rounded-lg
+                                              border
+                                              border-gray-300
+                                              dark:border-gray-700
+                                              dark:bg-gray-900
+                                              px-4 py-3
+                                              outline-none
+                                              focus:border-violet-500">
+
+                                    <p th:if="${#fields.hasErrors('ubicacion')}" th:errors="*{ubicacion}"
+                                        class="text-red-500 text-xs mt-1">
+                                    </p>
+
+                                </div>
+
+
+                                <!-- FABRICANTE -->
+
+                                <div>
+
+                                    <label for="fabricante" class="block text-sm font-medium mb-2">
+
+                                        Fabricante
+
+                                    </label>
+
+                                    <input id="fabricante" type="text" th:field="*{fabricante}"
+                                        placeholder="Ejemplo: SKF" autocomplete="off" class="w-full
+                                              rounded-lg
+                                              border
+                                              border-gray-300
+                                              dark:border-gray-700
+                                              dark:bg-gray-900
+                                              px-4 py-3
+                                              outline-none
+                                              focus:border-violet-500">
+
+                                </div>
+
+
+                                <!-- REFERENCIA -->
+
+                                <div>
+
+                                    <label for="referencia" class="block text-sm font-medium mb-2">
+
+                                        Referencia
+
+                                    </label>
+
+                                    <input id="referencia" type="text" th:field="*{referencia}"
+                                        placeholder="Ejemplo: 6205-2RS" autocomplete="off" class="w-full
+                                              rounded-lg
+                                              border
+                                              border-gray-300
+                                              dark:border-gray-700
+                                              dark:bg-gray-900
+                                              px-4 py-3
+                                              outline-none
+                                              focus:border-violet-500">
+
+                                </div>
+
+
+                                <!-- DESCRIPCIÓN -->
+
+                                <div class="md:col-span-2">
+
+                                    <label for="descripcion" class="block text-sm font-medium mb-2">
+
+                                        Descripción
+
+                                    </label>
+
+                                    <textarea id="descripcion" th:field="*{descripcion}" rows="4"
+                                        placeholder="Información adicional sobre la pieza..." class="w-full
+                                                 rounded-lg
+                                                 border
+                                                 border-gray-300
+                                                 dark:border-gray-700
+                                                 dark:bg-gray-900
+                                                 px-4 py-3
+                                                 outline-none
+                                                 resize-y
+                                                 focus:border-violet-500">
+                                </textarea>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- INFORMACIÓN QR -->
+
+                            <div class="mt-8
+                                    p-4
+                                    rounded-lg
+                                    bg-gray-50
+                                    dark:bg-gray-900/50">
+
+                                <p class="text-sm font-medium
+                                      text-gray-800
+                                      dark:text-gray-100">
+
+                                    Código QR
+
+                                </p>
+
+                                <p class="text-xs text-gray-400 mt-1">
+
+                                    ScannerCP generará automáticamente un identificador QR único al guardar la pieza.
+
+                                </p>
+
+                            </div>
+
+
+                            <!-- BOTONES -->
+
+                            <div class="flex
+                                    flex-col-reverse
+                                    sm:flex-row
+                                    justify-end
+                                    gap-3
+                                    mt-8">
+
+                                <a th:href="@{/piezas}" class="inline-flex
+                                      items-center
+                                      justify-center
+                                      px-4 py-2
+                                      rounded-lg
+                                      border
+                                      border-gray-300
+                                      dark:border-gray-700
+                                      hover:bg-gray-50
+                                      dark:hover:bg-gray-700/30">
+
+                                    Cancelar
+
+                                </a>
+
+                                <button type="submit" class="inline-flex
+                                           items-center
+                                           justify-center
+                                           px-4 py-2
+                                           rounded-lg
+                                           bg-violet-600
+                                           hover:bg-violet-700
+                                           text-white
+                                           font-medium">
+
+                                    Guardar pieza
+
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </main>
+
+        </div>
+
+    </div>
+
+
+    <th:block th:replace="~{layouts/main :: scripts}">
+    </th:block>
+
+</body>
+
+</html>

@@ -40,7 +40,12 @@ public class Pieza {
     @Column(name = "codigo_qr", nullable = false, unique = true, length = 255)
     private String codigoQr;
 
-    @Column(name = "fecha_registro", nullable = false)
+    @Column(
+        name = "fecha_registro", 
+        nullable = false,
+        insertable = false,
+        updatable = false
+    )
     private LocalDateTime fechaRegistro;
 
     public Pieza() {
@@ -130,7 +135,7 @@ public class Pieza {
         return fechaRegistro;
     }
 
-    public void setFechaRegistro(LocalDateTime fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
-    }
+    // public void setFechaRegistro(LocalDateTime fechaRegistro) {
+    //     this.fechaRegistro = fechaRegistro;
+    // }
 }
