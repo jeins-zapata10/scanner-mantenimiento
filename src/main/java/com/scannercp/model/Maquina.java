@@ -39,8 +39,21 @@ public class Maquina {
     @Column(name = "estado", nullable = false, length = 30)
     private String estado;
 
-    @Column(name = "fecha_registro", nullable = false)
+
+
+
+    @Column(
+        name = "fecha_registro", 
+        nullable = false,
+        insertable = false,
+        updatable = false
+    )
     private LocalDateTime fechaRegistro;
+
+
+
+
+
 
     public Maquina() {
     }
@@ -129,8 +142,8 @@ public class Maquina {
         return fechaRegistro;
     }
 
-    public void setFechaRegistro(LocalDateTime fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
-    }
+    // public void setFechaRegistro(LocalDateTime fechaRegistro) {
+    //     this.fechaRegistro = fechaRegistro;
+    // }
 
 }
