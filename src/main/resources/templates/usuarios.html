@@ -43,16 +43,14 @@
 
                         </h1>
 
-                        <a th:href="@{/usuarios/nuevo}"
-                            class="inline-flex
+                        <a th:href="@{/usuarios/nuevo}" class="inline-flex
                                     items-center
                                     px-4 py-2
                                     rounded-lg
                                     bg-violet-600
                                     text-white
                                     text-sm
-                                    front-medium"
-                        >
+                                    front-medium">
                             Nuevo Usuario
                         </a>
 
@@ -190,84 +188,95 @@
 
                     </div>
 
-                    <!-- FILTROS -->
+                    <!-- =====================================================
+                         FILTROS
+                    ====================================================== -->
+
                     <div class="bg-white
-                            dark:bg-gray-800
-                            shadow-xs
-                            rounded-xl
-                            p-5
-                            mb-6">
+                                dark:bg-gray-800
+                                shadow-xs
+                                rounded-xl
+                                p-5
+                                mb-6">
 
                         <div class="grid
-                                grid-cols-1
-                                md:grid-cols-3
-                                gap-4">
+                                    grid-cols-1
+                                    md:grid-cols-3
+                                    gap-4">
+
 
                             <!-- BUSCAR -->
+
                             <div>
 
                                 <label for="buscarUsuario" class="block
-                                          text-xs
-                                          uppercase
-                                          font-medium
-                                          text-gray-400
-                                          mb-2">
+                                              text-xs
+                                              uppercase
+                                              font-medium
+                                              text-gray-400
+                                              mb-2">
 
                                     Buscar
 
                                 </label>
 
-                                <input id="buscarUsuario" type="text" placeholder="Nombre o correo" class="w-full
-                                          rounded-lg
-                                          border
-                                          border-gray-200
-                                          dark:border-gray-700
-                                          bg-white
-                                          dark:bg-gray-900
-                                          px-3 py-2
-                                          text-sm
-                                          outline-none
-                                          focus:border-violet-500">
+
+                                <input id="buscarUsuario" type="text" placeholder="Nombre, correo o código"
+                                    autocomplete="off" class="w-full
+                                              rounded-lg
+                                              border
+                                              border-gray-200
+                                              dark:border-gray-700
+                                              bg-white
+                                              dark:bg-gray-900
+                                              px-3 py-2
+                                              text-sm
+                                              outline-none
+                                              focus:border-violet-500">
 
                             </div>
 
-                            <!-- ROL -->
+
+
+                            <!-- FILTRO ROL -->
+
                             <div>
 
                                 <label for="rol" class="block
-                                          text-xs
-                                          uppercase
-                                          font-medium
-                                          text-gray-400
-                                          mb-2">
+                                              text-xs
+                                              uppercase
+                                              font-medium
+                                              text-gray-400
+                                              mb-2">
 
                                     Rol
 
                                 </label>
 
-                                <select id="rol" class="w-full
-                                           rounded-lg
-                                           border
-                                           border-gray-200
-                                           dark:border-gray-700
-                                           bg-white
-                                           dark:bg-gray-900
-                                           px-3 py-2
-                                           text-sm">
 
-                                    <option value>
+                                <select id="rol" class="w-full
+                                               rounded-lg
+                                               border
+                                               border-gray-200
+                                               dark:border-gray-700
+                                               bg-white
+                                               dark:bg-gray-900
+                                               px-3 py-2
+                                               text-sm">
+
+                                    <option value="">
                                         Todos
                                     </option>
 
-                                    <option>
+                                    <option value="TECNICO">
                                         Técnico
                                     </option>
 
-                                    <option>
+                                    <option value="SUPERVISOR">
                                         Supervisor
                                     </option>
 
-                                    <option>
+                                    <option value="ADMIN">
                                         Administrador
                                     </option>
 
@@ -275,39 +284,43 @@
 
                             </div>
 
-                            <!-- ESTADO -->
+
+
+                            <!-- FILTRO ESTADO -->
+
                             <div>
 
                                 <label for="estado" class="block
-                                          text-xs
-                                          uppercase
-                                          font-medium
-                                          text-gray-400
-                                          mb-2">
+                                              text-xs
+                                              uppercase
+                                              font-medium
+                                              text-gray-400
+                                              mb-2">
 
                                     Estado
 
                                 </label>
 
-                                <select id="estado" class="w-full
-                                           rounded-lg
-                                           border
-                                           border-gray-200
-                                           dark:border-gray-700
-                                           bg-white
-                                           dark:bg-gray-900
-                                           px-3 py-2
-                                           text-sm">
 
-                                    <option value>
+                                <select id="estado" class="w-full
+                                               rounded-lg
+                                               border
+                                               border-gray-200
+                                               dark:border-gray-700
+                                               bg-white
+                                               dark:bg-gray-900
+                                               px-3 py-2
+                                               text-sm">
+
+                                    <option value="">
                                         Todos
                                     </option>
 
-                                    <option>
+                                    <option value="ACTIVO">
                                         Activo
                                     </option>
 
-                                    <option>
+                                    <option value="INACTIVO">
                                         Inactivo
                                     </option>
 
@@ -516,16 +529,22 @@
                                         </td>
 
                                         <!-- ACCIÓN -->
+                                        <!-- ACCIÓN -->
                                         <td class="px-5 py-4 text-right">
 
-                                            <button type="button" class="text-violet-600
-                           dark:text-violet-400
-                           font-medium
-                           hover:underline">
+                                            <a th:href="@{/usuarios/{id}/editar(id=${usuario.idUsuario})}" class="inline-flex
+              items-center
+              px-3 py-2
+              rounded-lg
+              bg-violet-600
+              text-white
+              text-xs
+              font-medium
+              hover:bg-violet-700">
 
-                                                Ver
+                                                Editar
 
-                                            </button>
+                                            </a>
 
                                         </td>
 

@@ -27,7 +27,6 @@ public class UsuarioController {
                 this.usuarioService = usuarioService;
         }
 
-
         @GetMapping("/usuarios")
         public String usuarios(Model model) {
 
@@ -105,6 +104,70 @@ public class UsuarioController {
                                 EstadoUsuario.values());
 
                 return "usuario-editar";
+        }
+
+        @PostMapping("/usuarios/{id}/editar")
+        public String actualizarUsuario(
+                        @PathVariable Long id,
+
+                        @Valid @ModelAttribute("usuarioForm") UsuarioEdicionForm formulario,
+
+                        BindingResult bindingResult,
+
+                        Model model,
+
+                        RedirectAttributes redirectAttributes) {
+
+                // Si las validaciones del DTO fallan
+                if (bindingResult.hasErrors()) {
+
+                        model.addAttribute(
+                                        "usuarioId",
+                                        id);
+
+                        model.addAttribute(
+                                        "roles",
+                                        RolUsuario.values());
+
+                        model.addAttribute(
+                                        "estados",
+                                        EstadoUsuario.values());
+
+                        return "usuario-editar";
+                }
+
+                try {
+
+                        usuarioService.actualizarUsuario(
+                                        id,
+                                        formulario);
+
+                } catch (IllegalArgumentException e) {
+
+                        bindingResult.reject(
+                                        "usuario.error",
+                                        e.getMessage());
+
+                        model.addAttribute(
+                                        "usuarioId",
+                                        id);
+
+                        model.addAttribute(
+                                        "roles",
+                                        RolUsuario.values());
+
+                        model.addAttribute(
+                                        "estados",
+                                        EstadoUsuario.values());
+
+                        return "usuario-editar";
+                }
+
+                redirectAttributes.addFlashAttribute(
+                                "mensajeExito",
+                                "Usuario actualizado correctamente");
+
+                return "redirect:/usuarios";
         }
 
         @PostMapping("/usuarios")
