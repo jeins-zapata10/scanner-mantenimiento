@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layouts/main :: head}">
+</head>
+
+<body class="min-h-[100dvh]
+             bg-gray-100
+             dark:bg-gray-950
+             text-gray-800
+             dark:text-gray-100">
+
+    <!-- =====================================================
+         CONTENEDOR MÓVIL
+    ====================================================== -->
+
+    <main class="min-h-[100dvh]
+                 flex
+                 justify-center">
+
+        <div class="w-full
+                    max-w-md
+                    min-h-[100dvh]
+                    bg-white
+                    dark:bg-gray-900
+                    shadow-xl
+                    flex
+                    flex-col">
+
+
+            <!-- =================================================
+                 HEADER
+            ================================================== -->
+
+            <header class="px-5
+                           py-5
+                           border-b
+                           border-gray-200
+                           dark:border-gray-800">
+
+                <div class="flex
+                            items-center
+                            justify-between
+                            gap-4">
+
+                    <div>
+
+                        <p class="text-xs
+                                  uppercase
+                                  tracking-wider
+                                  text-violet-600
+                                  dark:text-violet-400
+                                  font-semibold">
+
+                            ScannerCP
+
+                        </p>
+
+                        <h1 class="text-xl
+                                   font-bold
+                                   mt-1">
+
+                            Escaneo de piezas
+
+                        </h1>
+
+                    </div>
+
+
+                    <!--
+                        Más adelante aquí podremos mostrar:
+                        - Usuario
+                        - Rol
+                        - Cerrar sesión
+                    -->
+
+                    <div class="w-10
+                                h-10
+                                rounded-full
+                                bg-violet-100
+                                dark:bg-violet-500/20
+                                flex
+                                items-center
+                                justify-center
+                                text-violet-700
+                                dark:text-violet-300
+                                font-bold">
+
+                        S
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- =================================================
+                 CONTENIDO
+            ================================================== -->
+
+            <section class="flex-1
+                            px-5
+                            py-6">
+
+
+                <!-- BIENVENIDA -->
+
+                <div class="mb-6">
+
+                    <h2 class="text-lg
+                               font-semibold">
+
+                        Identifica una pieza
+
+                    </h2>
+
+                    <p class="text-sm
+                              text-gray-500
+                              dark:text-gray-400
+                              mt-1">
+
+                        Escanea el código QR instalado
+                        físicamente en la máquina.
+
+                    </p>
+
+                </div>
+
+
+                <!-- =================================================
+                     ÁREA DE CÁMARA
+                ================================================== -->
+
+                <div class="relative
+                            overflow-hidden
+                            rounded-2xl
+                            bg-gray-950
+                            aspect-square
+                            shadow-lg">
+
+
+                    <!-- AQUÍ MOSTRAREMOS LA CÁMARA -->
+                    <video id="cameraPreview" class="hidden
+              absolute
+              inset-0
+              w-full
+              h-full
+              object-cover" autoplay muted playsinline>
+                    </video>
+
+                    <div id="scannerPlaceholder" class="absolute
+                                inset-0
+                                flex
+                                flex-col
+                                items-center
+                                justify-center
+                                text-center
+                                px-8">
+
+                        <div class="w-16
+                                    h-16
+                                    rounded-full
+                                    bg-white/10
+                                    flex
+                                    items-center
+                                    justify-center
+                                    mb-4">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="1.8" class="w-8 h-8 text-white">
+
+                                <path d="M3 7V5a2 2 0 0 1 2-2h2" />
+                                <path d="M17 3h2a2 2 0 0 1 2 2v2" />
+                                <path d="M21 17v2a2 2 0 0 1-2 2h-2" />
+                                <path d="M7 21H5a2 2 0 0 1-2-2v-2" />
+                                <rect x="7" y="7" width="3" height="3" />
+                                <rect x="14" y="7" width="3" height="3" />
+                                <rect x="7" y="14" width="3" height="3" />
+                                <path d="M14 14h1v1h-1z" />
+                                <path d="M17 14v3h-3" />
+
+                            </svg>
+
+                        </div>
+
+
+                        <p class="text-white
+                                  font-medium">
+
+                            Cámara desactivada
+
+                        </p>
+
+                        <p class="text-sm
+                                  text-gray-400
+                                  mt-2">
+
+                            Presiona el botón para iniciar
+                            el lector QR.
+
+                        </p>
+
+                    </div>
+
+
+                    <!-- MARCO VISUAL DEL QR -->
+
+                    <div class="absolute
+                                inset-0
+                                pointer-events-none
+                                flex
+                                items-center
+                                justify-center">
+
+                        <div class="w-52
+                                    h-52
+                                    border-2
+                                    border-violet-400
+                                    rounded-2xl">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     BOTÓN ESCANEAR
+                ================================================== -->
+
+                <button id="btnIniciarScanner" type="button" class="w-full
+                               mt-6
+                               inline-flex
+                               items-center
+                               justify-center
+                               gap-2
+                               px-5
+                               py-4
+                               rounded-xl
+                               bg-violet-600
+                               hover:bg-violet-700
+                               text-white
+                               font-semibold
+                               transition">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" class="w-5 h-5">
+
+                        <path d="M3 7V5a2 2 0 0 1 2-2h2" />
+                        <path d="M17 3h2a2 2 0 0 1 2 2v2" />
+                        <path d="M21 17v2a2 2 0 0 1-2 2h-2" />
+                        <path d="M7 21H5a2 2 0 0 1-2-2v-2" />
+                        <path d="M7 12h10" />
+
+                    </svg>
+
+                    Activar cámara
+
+                </button>
+
+
+                <!-- =================================================
+                     ESTADO
+                ================================================== -->
+
+                <div class="mt-6
+                            rounded-xl
+                            border
+                            border-gray-200
+                            dark:border-gray-800
+                            p-4">
+
+                    <div class="flex
+                                items-center
+                                gap-3">
+
+                        <div id="scannerEstadoPunto" 
+                            class="w-3
+                            h-3
+                            rounded-full
+                            bg-gray-400">
+                        </div>
+
+                        <div>
+
+                            <p id="scannerEstado" 
+                                class="text-sm
+                                font-medium">
+
+                                Esperando escaneo
+
+                            </p>
+
+                            <p id="scannerDetalle"
+                                class="text-xs
+                                text-gray-400
+                                mt-1">
+
+                                Ninguna pieza identificada.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 PIE DE PÁGINA
+            ================================================== -->
+
+            <footer class="px-5
+                           py-4
+                           border-t
+                           border-gray-200
+                           dark:border-gray-800
+                           text-center">
+
+                <p class="text-xs
+                          text-gray-400">
+
+                    Sistema de mantenimiento ScannerCP
+
+                </p>
+
+            </footer>
+
+        </div>
+
+    </main>
+
+    <script th:src="@{/js/scanner.js}"></script>
+
+</body>
+
+</html>
