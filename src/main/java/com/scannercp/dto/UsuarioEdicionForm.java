@@ -1,14 +1,14 @@
 package com.scannercp.dto;
 
+import com.scannercp.model.enums.EstadoUsuario;
 import com.scannercp.model.enums.RolUsuario;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import jakarta.validation.constraints.Pattern;
 
-public class UsuarioRegistroForm {
+public class UsuarioEdicionForm {
 
     @NotBlank(message = "El código es obligatorio")
     private String codigo;
@@ -18,7 +18,7 @@ public class UsuarioRegistroForm {
 
     @NotBlank(message = "Los apellidos son obligatorios")
     private String apellidos;
-    
+
     @NotBlank(message = "El correo es obligatorio")
     @Email(message = "Ingresa un correo válido")
     @Pattern(
@@ -27,12 +27,12 @@ public class UsuarioRegistroForm {
     )
     private String correo;
 
-    @NotBlank(message = "La contraseña es obligatoria")
-    @Size(min = 8, message = "La contraseña debe tener mínimo 8 caracteres")
-    private String password;
-
     @NotNull(message = "Selecciona un rol")
     private RolUsuario rol;
+
+    @NotNull(message = "Selecciona un estado")
+    private EstadoUsuario estado;
+
 
     public String getCodigo() {
         return codigo;
@@ -66,19 +66,19 @@ public class UsuarioRegistroForm {
         this.correo = correo;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public RolUsuario getRol() {
         return rol;
     }
 
     public void setRol(RolUsuario rol) {
         this.rol = rol;
+    }
+
+    public EstadoUsuario getEstado() {
+        return estado;
+    }
+
+    public void setEstado(EstadoUsuario estado) {
+        this.estado = estado;
     }
 }
