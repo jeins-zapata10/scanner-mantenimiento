@@ -7,6 +7,55 @@ document.addEventListener("DOMContentLoaded", () => {
     const estado = document.getElementById("scannerEstado");
     const detalle = document.getElementById("scannerDetalle");
     const punto = document.getElementById("scannerEstadoPunto");
+    const piezaResultado =
+        document.getElementById("piezaResultado");
+
+    const piezaNombre =
+        document.getElementById("piezaNombre");
+
+    const piezaCodigo =
+        document.getElementById("piezaCodigo");
+
+    const piezaEstado =
+        document.getElementById("piezaEstado");
+
+    const piezaUbicacion =
+        document.getElementById("piezaUbicacion");
+
+    const piezaFabricante =
+        document.getElementById("piezaFabricante");
+
+    const piezaReferencia =
+        document.getElementById("piezaReferencia");
+
+    const piezaDescripcion =
+        document.getElementById("piezaDescripcion");
+
+    const maquinaNombre =
+        document.getElementById("maquinaNombre");
+
+    const maquinaCodigo =
+        document.getElementById("maquinaCodigo");
+
+    const maquinaArea =
+        document.getElementById("maquinaArea");
+
+    const maquinaUbicacion =
+        document.getElementById("maquinaUbicacion");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     let stream = null;
     let escaneando = false;
@@ -110,6 +159,10 @@ document.addEventListener("DOMContentLoaded", () => {
             detalle.textContent =
                 "Verifica los permisos de cámara del navegador.";
         }
+
+        piezaResultado.classList.add(
+            "hidden"
+        );
     }
 
 
@@ -205,6 +258,19 @@ document.addEventListener("DOMContentLoaded", () => {
         );
     }
 
+    function mostrarValor(valor) {
+
+        if (
+            valor === null ||
+            valor === undefined ||
+            String(valor).trim() === ""
+        ) {
+            return "Sin registro";
+        }
+
+        return valor;
+    }
+
 
     /*
      * =========================================================
@@ -212,33 +278,154 @@ document.addEventListener("DOMContentLoaded", () => {
      * =========================================================
      */
 
-    function qrDetectado(contenido) {
+    async function qrDetectado(contenido) {
 
         detenerCamara();
 
-
         estado.textContent =
-            "QR detectado";
+            "Consultando pieza...";
 
         detalle.textContent =
-            contenido;
-
+            "Buscando información en ScannerCP.";
 
         punto.classList.remove(
             "bg-gray-400",
-            "bg-violet-500"
-        );
-
-        punto.classList.add(
+            "bg-violet-500",
             "bg-green-500"
         );
 
-
-        console.log(
-            "QR ScannerCP:",
-            contenido
+        punto.classList.add(
+            "bg-violet-500"
         );
+
+
+        try {
+
+            const respuesta =
+                await fetch(
+                    `/api/piezas/qr/${encodeURIComponent(contenido)}`
+                );
+
+
+            if (!respuesta.ok) {
+
+                throw new Error(
+                    "No se encontró la pieza"
+                );
+            }
+
+
+            const pieza =
+                await respuesta.json();
+
+
+            /*
+             * =====================================================
+             * LLENAR INFORMACIÓN DE PIEZA
+             * =====================================================
+             */
+
+            piezaNombre.textContent =
+                mostrarValor(pieza.nombre);
+
+            piezaCodigo.textContent =
+                mostrarValor(pieza.codigo);
+
+            piezaEstado.textContent =
+                mostrarValor(pieza.estado);
+
+            piezaUbicacion.textContent =
+                mostrarValor(pieza.ubicacion);
+
+            piezaFabricante.textContent =
+                mostrarValor(pieza.fabricante);
+
+            piezaReferencia.textContent =
+                mostrarValor(pieza.referencia);
+
+            piezaDescripcion.textContent =
+                mostrarValor(pieza.descripcion);
+
+
+            /*
+             * =====================================================
+             * LLENAR INFORMACIÓN DE MÁQUINA
+             * =====================================================
+             */
+
+            maquinaNombre.textContent =
+                mostrarValor(pieza.nombreMaquina);
+
+            maquinaCodigo.textContent =
+                mostrarValor(pieza.codigoMaquina);
+
+            maquinaArea.textContent =
+                mostrarValor(pieza.areaMaquina);
+
+            maquinaUbicacion.textContent =
+                mostrarValor(pieza.ubicacionMaquina);
+
+
+            /*
+             * =====================================================
+             * MOSTRAR RESULTADO
+             * =====================================================
+             */
+
+            piezaResultado.classList.remove(
+                "hidden"
+            );
+
+
+            estado.textContent =
+                "Pieza identificada";
+
+            detalle.textContent =
+                `${pieza.codigo} - ${pieza.nombre}`;
+
+
+            punto.classList.remove(
+                "bg-violet-500"
+            );
+
+            punto.classList.add(
+                "bg-green-500"
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "Error consultando la pieza:",
+                error
+            );
+
+
+            piezaResultado.classList.add(
+                "hidden"
+            );
+
+
+            estado.textContent =
+                "QR no reconocido";
+
+            detalle.textContent =
+                "El código escaneado no corresponde a una pieza registrada.";
+
+
+            punto.classList.remove(
+                "bg-violet-500",
+                "bg-green-500"
+            );
+
+            punto.classList.add(
+                "bg-red-500"
+            );
+        }
     }
+
+
+
 
 
     /*

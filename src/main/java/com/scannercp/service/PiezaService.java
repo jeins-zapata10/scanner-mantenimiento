@@ -16,165 +16,186 @@ import java.util.UUID;
 @Service
 public class PiezaService {
 
-    private final PiezaRepository piezaRepository;
-    private final MaquinaRepository maquinaRepository;
+        private final PiezaRepository piezaRepository;
+        private final MaquinaRepository maquinaRepository;
 
-    public PiezaService(
-            PiezaRepository piezaRepository,
-            MaquinaRepository maquinaRepository) {
+        public PiezaService(
+                        PiezaRepository piezaRepository,
+                        MaquinaRepository maquinaRepository) {
 
-        this.piezaRepository = piezaRepository;
-        this.maquinaRepository = maquinaRepository;
-    }
-
-    /*
-     * =========================================================
-     * LISTAR TODAS LAS PIEZAS
-     * =========================================================
-     */
-
-    public List<Pieza> listarPiezas() {
-        return piezaRepository.findAll();
-    }
-
-    /*
-     * =========================================================
-     * LISTAR PIEZAS DE UNA MÁQUINA
-     * =========================================================
-     */
-
-    public List<Pieza> listarPiezasPorMaquina(Long idMaquina) {
-
-        return piezaRepository
-                .findByMaquinaIdMaquina(idMaquina);
-    }
-
-    /*
-     * =========================================================
-     * CONTAR PIEZAS DE UNA MÁQUINA
-     * =========================================================
-     */
-
-    public long contarPiezasPorMaquina(Long idMaquina) {
-
-        return piezaRepository
-                .countByMaquinaIdMaquina(idMaquina);
-    }
-
-    /*
-     * =========================================================
-     * BUSCAR PIEZA POR ID
-     * =========================================================
-     */
-
-    public Pieza buscarPorId(Long idPieza) {
-
-        return piezaRepository.findById(idPieza)
-                .orElseThrow(
-                        () -> new IllegalArgumentException(
-                                "La pieza no existe"));
-    }
-
-    /*
-     * =========================================================
-     * CREAR PIEZA
-     * =========================================================
-     */
-
-    @Transactional
-    public Pieza crearPieza(PiezaRegistroForm formulario) {
-
-        Maquina maquina = maquinaRepository
-                .findById(formulario.getIdMaquina())
-                .orElseThrow(
-                        () -> new IllegalArgumentException(
-                                "La máquina seleccionada no existe"));
-
-        String codigoNormalizado = formulario.getCodigo()
-                .trim()
-                .toUpperCase(Locale.ROOT);
-
-        if (piezaRepository.existsByCodigo(codigoNormalizado)) {
-
-            throw new IllegalArgumentException(
-                    "Ya existe una pieza registrada con ese código");
+                this.piezaRepository = piezaRepository;
+                this.maquinaRepository = maquinaRepository;
         }
-
-        Pieza pieza = new Pieza();
-
-        pieza.setMaquina(maquina);
-
-        pieza.setCodigo(codigoNormalizado);
-
-        pieza.setNombre(
-                formulario.getNombre().trim());
-
-        pieza.setUbicacion(
-                normalizarOpcional(formulario.getUbicacion()));
-
-        pieza.setFabricante(
-                normalizarOpcional(formulario.getFabricante()));
-
-        pieza.setReferencia(
-                normalizarOpcional(formulario.getReferencia()));
-
-        pieza.setDescripcion(
-                normalizarOpcional(formulario.getDescripcion()));
-
-        pieza.setEstado(
-                formulario.getEstado()
-                        .trim()
-                        .toUpperCase(Locale.ROOT));
 
         /*
-         * El usuario NO escribe el QR.
-         * ScannerCP genera un identificador único.
+         * =========================================================
+         * LISTAR TODAS LAS PIEZAS
+         * =========================================================
          */
 
-        pieza.setCodigoQr(
-                generarCodigoQr());
-
-        return piezaRepository.save(pieza);
-    }
-
-    /*
-     * =========================================================
-     * GENERAR IDENTIFICADOR QR
-     * =========================================================
-     */
-
-    private String generarCodigoQr() {
-
-        String codigoQr;
-
-        do {
-
-            codigoQr = "SCANNERCP:PZA:"
-                    + UUID.randomUUID();
-
-        } while (piezaRepository.existsByCodigoQr(codigoQr));
-
-        return codigoQr;
-    }
-
-    /*
-     * =========================================================
-     * NORMALIZAR CAMPOS OPCIONALES
-     * =========================================================
-     */
-
-    private String normalizarOpcional(String valor) {
-
-        if (valor == null) {
-            return null;
+        public List<Pieza> listarPiezas() {
+                return piezaRepository.findAll();
         }
 
-        String valorNormalizado = valor.trim();
+        /*
+         * =========================================================
+         * LISTAR PIEZAS DE UNA MÁQUINA
+         * =========================================================
+         */
 
-        if (valorNormalizado.isEmpty()) {
-            return null;
+        public List<Pieza> listarPiezasPorMaquina(Long idMaquina) {
+
+                return piezaRepository
+                                .findByMaquinaIdMaquina(idMaquina);
         }
 
-        return valorNormalizado;
-    }
+        /*
+         * =========================================================
+         * CONTAR PIEZAS DE UNA MÁQUINA
+         * =========================================================
+         */
+
+        public long contarPiezasPorMaquina(Long idMaquina) {
+
+                return piezaRepository
+                                .countByMaquinaIdMaquina(idMaquina);
+        }
+
+        /*
+         * =========================================================
+         * BUSCAR PIEZA POR ID
+         * =========================================================
+         */
+
+        public Pieza buscarPorId(Long idPieza) {
+
+                return piezaRepository.findById(idPieza)
+                                .orElseThrow(
+                                                () -> new IllegalArgumentException(
+                                                                "La pieza no existe"));
+        }
+
+        /*
+         * =========================================================
+         * BUSCAR PIEZA POR CÓDIGO QR
+         * =========================================================
+         */
+
+        public Pieza buscarPorCodigoQr(String codigoQr) {
+
+                if (codigoQr == null || codigoQr.isBlank()) {
+
+                        throw new IllegalArgumentException(
+                                        "El código QR es obligatorio");
+                }
+
+                return piezaRepository
+                                .findByCodigoQr(codigoQr.trim())
+                                .orElseThrow(
+                                                () -> new IllegalArgumentException(
+                                                                "No existe una pieza asociada a este código QR"));
+        }
+
+        /*
+         * =========================================================
+         * CREAR PIEZA
+         * =========================================================
+         */
+
+        @Transactional
+        public Pieza crearPieza(PiezaRegistroForm formulario) {
+
+                Maquina maquina = maquinaRepository
+                                .findById(formulario.getIdMaquina())
+                                .orElseThrow(
+                                                () -> new IllegalArgumentException(
+                                                                "La máquina seleccionada no existe"));
+
+                String codigoNormalizado = formulario.getCodigo()
+                                .trim()
+                                .toUpperCase(Locale.ROOT);
+
+                if (piezaRepository.existsByCodigo(codigoNormalizado)) {
+
+                        throw new IllegalArgumentException(
+                                        "Ya existe una pieza registrada con ese código");
+                }
+
+                Pieza pieza = new Pieza();
+
+                pieza.setMaquina(maquina);
+
+                pieza.setCodigo(codigoNormalizado);
+
+                pieza.setNombre(
+                                formulario.getNombre().trim());
+
+                pieza.setUbicacion(
+                                normalizarOpcional(formulario.getUbicacion()));
+
+                pieza.setFabricante(
+                                normalizarOpcional(formulario.getFabricante()));
+
+                pieza.setReferencia(
+                                normalizarOpcional(formulario.getReferencia()));
+
+                pieza.setDescripcion(
+                                normalizarOpcional(formulario.getDescripcion()));
+
+                pieza.setEstado(
+                                formulario.getEstado()
+                                                .trim()
+                                                .toUpperCase(Locale.ROOT));
+
+                /*
+                 * El usuario NO escribe el QR.
+                 * ScannerCP genera un identificador único.
+                 */
+
+                pieza.setCodigoQr(
+                                generarCodigoQr());
+
+                return piezaRepository.save(pieza);
+        }
+
+        /*
+         * =========================================================
+         * GENERAR IDENTIFICADOR QR
+         * =========================================================
+         */
+
+        private String generarCodigoQr() {
+
+                String codigoQr;
+
+                do {
+
+                        codigoQr = "SCANNERCP:PZA:"
+                                        + UUID.randomUUID();
+
+                } while (piezaRepository.existsByCodigoQr(codigoQr));
+
+                return codigoQr;
+        }
+
+        /*
+         * =========================================================
+         * NORMALIZAR CAMPOS OPCIONALES
+         * =========================================================
+         */
+
+        private String normalizarOpcional(String valor) {
+
+                if (valor == null) {
+                        return null;
+                }
+
+                String valorNormalizado = valor.trim();
+
+                if (valorNormalizado.isEmpty()) {
+                        return null;
+                }
+
+                return valorNormalizado;
+        }
 }
