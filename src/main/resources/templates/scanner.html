@@ -150,6 +150,52 @@
               object-cover" autoplay muted playsinline>
                     </video>
 
+                    
+                    <!-- CONFIRMACIÓN DE LECTURA -->
+
+                    <div id="scannerConfirmacion" class="hidden
+            absolute
+            inset-0
+            z-20
+            bg-green-600/95
+            flex
+            flex-col
+            items-center
+            justify-center
+            text-white">
+
+                        <div class="w-20
+                h-20
+                rounded-full
+                bg-white/20
+                flex
+                items-center
+                justify-center
+                mb-4">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2.5" class="w-10 h-10">
+
+                                <path d="M20 6 9 17l-5-5" />
+
+                            </svg>
+
+                        </div>
+
+                        <p class="text-xl font-bold">
+                            QR leído
+                        </p>
+
+                        <p class="text-sm
+              text-green-100
+              mt-2">
+
+                            Procesando información...
+
+                        </p>
+
+                    </div>
+
                     <div id="scannerPlaceholder" class="absolute
                                 inset-0
                                 flex
@@ -307,10 +353,14 @@
 
 
                 <!-- =================================================
-     INFORMACIÓN DE LA PIEZA ESCANEADA
-================================================== -->
+                INFORMACIÓN DE LA PIEZA ESCANEADA
+                ================================================== -->
 
                 <div id="piezaResultado" class="hidden
+            opacity-0
+            translate-y-4
+            transition-all
+            duration-500
             mt-6
             rounded-2xl
             border
@@ -358,96 +408,119 @@
                     </div>
 
 
-                    <!-- INFORMACIÓN -->
+                    <!-- DATOS EN DOS COLUMNAS -->
 
-                    <div class="p-5 space-y-5">
-
-                        <!-- MÁQUINA -->
-
-                        <div>
-
-                            <p class="text-xs
-                      uppercase
-                      tracking-wide
-                      text-gray-400">
-
-                                Máquina
-
-                            </p>
-
-                            <p id="maquinaNombre" class="font-semibold
-                      text-gray-800
-                      dark:text-gray-100
-                      mt-1">
-
-                                Máquina
-
-                            </p>
-
-                            <p id="maquinaCodigo" class="text-sm
-                      text-gray-500
-                      dark:text-gray-400">
-
-                                Código máquina
-
-                            </p>
-
-                        </div>
-
-
-                        <!-- ESTADO -->
-
-                        <div>
-
-                            <p class="text-xs
-                      uppercase
-                      tracking-wide
-                      text-gray-400">
-
-                                Estado
-
-                            </p>
-
-                            <p id="piezaEstado" class="font-medium
-                      mt-1">
-
-                                Estado
-
-                            </p>
-
-                        </div>
-
-
-                        <!-- UBICACIÓN PIEZA -->
-
-                        <div>
-
-                            <p class="text-xs
-                      uppercase
-                      tracking-wide
-                      text-gray-400">
-
-                                Ubicación de la pieza
-
-                            </p>
-
-                            <p id="piezaUbicacion" class="text-sm
-                      text-gray-700
-                      dark:text-gray-300
-                      mt-1">
-
-                                Sin registro
-
-                            </p>
-
-                        </div>
-
-
-                        <!-- FABRICANTE / REFERENCIA -->
+                    <div class="p-5">
 
                         <div class="grid
                     grid-cols-2
-                    gap-4">
+                    gap-x-5
+                    gap-y-6">
+
+                            <!-- MÁQUINA -->
+
+                            <div>
+
+                                <p class="text-xs
+                          uppercase
+                          tracking-wide
+                          text-gray-400">
+
+                                    Máquina
+
+                                </p>
+
+                                <p id="maquinaNombre" class="font-semibold
+                          text-sm
+                          mt-1">
+
+                                    Máquina
+
+                                </p>
+
+                                <p id="maquinaCodigo" class="text-xs
+                          text-gray-500
+                          dark:text-gray-400
+                          mt-1">
+
+                                    Código
+
+                                </p>
+
+                            </div>
+
+
+                            <!-- ESTADO -->
+
+                            <div>
+
+                                <p class="text-xs
+                          uppercase
+                          tracking-wide
+                          text-gray-400">
+
+                                    Estado
+
+                                </p>
+
+                                <p id="piezaEstado" class="font-semibold
+                          text-sm
+                          mt-1">
+
+                                    Estado
+
+                                </p>
+
+                            </div>
+
+
+                            <!-- UBICACIÓN PIEZA -->
+
+                            <div>
+
+                                <p class="text-xs
+                          uppercase
+                          tracking-wide
+                          text-gray-400">
+
+                                    Ubicación pieza
+
+                                </p>
+
+                                <p id="piezaUbicacion" class="text-sm
+                          mt-1">
+
+                                    Sin registro
+
+                                </p>
+
+                            </div>
+
+
+                            <!-- ÁREA -->
+
+                            <div>
+
+                                <p class="text-xs
+                          uppercase
+                          tracking-wide
+                          text-gray-400">
+
+                                    Área
+
+                                </p>
+
+                                <p id="maquinaArea" class="text-sm
+                          mt-1">
+
+                                    Sin registro
+
+                                </p>
+
+                            </div>
+
+
+                            <!-- FABRICANTE -->
 
                             <div>
 
@@ -461,8 +534,6 @@
                                 </p>
 
                                 <p id="piezaFabricante" class="text-sm
-                          text-gray-700
-                          dark:text-gray-300
                           mt-1">
 
                                     Sin registro
@@ -470,6 +541,9 @@
                                 </p>
 
                             </div>
+
+
+                            <!-- REFERENCIA -->
 
                             <div>
 
@@ -483,9 +557,55 @@
                                 </p>
 
                                 <p id="piezaReferencia" class="text-sm
-                          text-gray-700
-                          dark:text-gray-300
                           mt-1">
+
+                                    Sin registro
+
+                                </p>
+
+                            </div>
+
+
+                            <!-- UBICACIÓN MÁQUINA -->
+
+                            <div class="col-span-2">
+
+                                <p class="text-xs
+                          uppercase
+                          tracking-wide
+                          text-gray-400">
+
+                                    Ubicación de la máquina
+
+                                </p>
+
+                                <p id="maquinaUbicacion" class="text-sm
+                          mt-1">
+
+                                    Sin registro
+
+                                </p>
+
+                            </div>
+
+
+                            <!-- DESCRIPCIÓN -->
+
+                            <div class="col-span-2">
+
+                                <p class="text-xs
+                          uppercase
+                          tracking-wide
+                          text-gray-400">
+
+                                    Descripción
+
+                                </p>
+
+                                <p id="piezaDescripcion" class="text-sm
+                          mt-1
+                          text-gray-600
+                          dark:text-gray-300">
 
                                     Sin registro
 
@@ -496,85 +616,8 @@
                         </div>
 
 
-                        <!-- ÁREA -->
-
-                        <div>
-
-                            <p class="text-xs
-                      uppercase
-                      tracking-wide
-                      text-gray-400">
-
-                                Área
-
-                            </p>
-
-                            <p id="maquinaArea" class="text-sm
-                      text-gray-700
-                      dark:text-gray-300
-                      mt-1">
-
-                                Sin registro
-
-                            </p>
-
-                        </div>
-
-
-                        <!-- UBICACIÓN MÁQUINA -->
-
-                        <div>
-
-                            <p class="text-xs
-                      uppercase
-                      tracking-wide
-                      text-gray-400">
-
-                                Ubicación de la máquina
-
-                            </p>
-
-                            <p id="maquinaUbicacion" class="text-sm
-                      text-gray-700
-                      dark:text-gray-300
-                      mt-1">
-
-                                Sin registro
-
-                            </p>
-
-                        </div>
-
-
-                        <!-- DESCRIPCIÓN -->
-
-                        <div>
-
-                            <p class="text-xs
-                      uppercase
-                      tracking-wide
-                      text-gray-400">
-
-                                Descripción
-
-                            </p>
-
-                            <p id="piezaDescripcion" class="text-sm
-                      text-gray-700
-                      dark:text-gray-300
-                      mt-1">
-
-                                Sin registro
-
-                            </p>
-
-                        </div>
-
-
-                        <!-- FUTURO FLUJO -->
-
                         <button id="btnIniciarInspeccion" type="button" class="w-full
-                       mt-2
+                       mt-6
                        px-5
                        py-4
                        rounded-xl
@@ -590,7 +633,6 @@
                     </div>
 
                 </div>
-
 
 
 

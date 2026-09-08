@@ -43,6 +43,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const maquinaUbicacion =
         document.getElementById("maquinaUbicacion");
 
+    const confirmacion = document.getElementById("scannerConfirmacion");
+
 
 
 
@@ -271,6 +273,20 @@ document.addEventListener("DOMContentLoaded", () => {
         return valor;
     }
 
+    /*
+     * =========================================================
+     * ESPERAR PROCESAMIENTO
+     * =========================================================
+     */
+
+    function esperar(milisegundos) {
+        return new Promise(
+            resposive => setTimeout(resolve, milisegundos)
+        );
+    }
+
+
+
 
     /*
      * =========================================================
@@ -282,21 +298,73 @@ document.addEventListener("DOMContentLoaded", () => {
 
         detenerCamara();
 
+
+        /*
+         * =====================================================
+         * CONFIRMACIÓN INMEDIATA
+         * =====================================================
+         */
+
+        confirmacion.classList.remove(
+            "hidden"
+        );
+
+        piezaResultado.classList.add(
+            "hidden",
+            "opacity-0",
+            "translate-y-4"
+        );
+
+
+        estado.textContent =
+            "QR leído";
+
+        detalle.textContent =
+            "Procesando información de la pieza...";
+
+
+        punto.classList.remove(
+            "bg-gray-400",
+            "bg-violet-500",
+            "bg-red-500"
+        );
+
+        punto.classList.add(
+            "bg-green-500"
+        );
+
+
+        /*
+         * Vibración corta en celulares compatibles
+         */
+
+        if ("vibrate" in navigator) {
+
+            navigator.vibrate(
+                [120, 60, 120]
+            );
+        }
+
+
+        boton.disabled = true;
+
+        boton.textContent =
+            "Procesando...";
+
+
+        /*
+         * Pausa para que el usuario perciba
+         * claramente que el QR fue leído.
+         */
+
+        await esperar(1200);
+
+
         estado.textContent =
             "Consultando pieza...";
 
         detalle.textContent =
             "Buscando información en ScannerCP.";
-
-        punto.classList.remove(
-            "bg-gray-400",
-            "bg-violet-500",
-            "bg-green-500"
-        );
-
-        punto.classList.add(
-            "bg-violet-500"
-        );
 
 
         try {
@@ -321,7 +389,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             /*
              * =====================================================
-             * LLENAR INFORMACIÓN DE PIEZA
+             * PIEZA
              * =====================================================
              */
 
@@ -349,7 +417,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             /*
              * =====================================================
-             * LLENAR INFORMACIÓN DE MÁQUINA
+             * MÁQUINA
              * =====================================================
              */
 
@@ -368,13 +436,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
             /*
              * =====================================================
-             * MOSTRAR RESULTADO
+             * OCULTAR CONFIRMACIÓN
+             * =====================================================
+             */
+
+            confirmacion.classList.add(
+                "hidden"
+            );
+
+
+            /*
+             * =====================================================
+             * MOSTRAR TARJETA CON ANIMACIÓN
              * =====================================================
              */
 
             piezaResultado.classList.remove(
                 "hidden"
             );
+
+
+            requestAnimationFrame(() => {
+
+                piezaResultado.classList.remove(
+                    "opacity-0",
+                    "translate-y-4"
+                );
+
+            });
 
 
             estado.textContent =
@@ -384,13 +473,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 `${pieza.codigo} - ${pieza.nombre}`;
 
 
-            punto.classList.remove(
-                "bg-violet-500"
-            );
+            boton.disabled = false;
 
-            punto.classList.add(
-                "bg-green-500"
-            );
+            boton.textContent =
+                "Escanear otra pieza";
 
 
         } catch (error) {
@@ -398,6 +484,11 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error(
                 "Error consultando la pieza:",
                 error
+            );
+
+
+            confirmacion.classList.add(
+                "hidden"
             );
 
 
@@ -414,16 +505,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
             punto.classList.remove(
-                "bg-violet-500",
-                "bg-green-500"
+                "bg-green-500",
+                "bg-violet-500"
             );
 
             punto.classList.add(
                 "bg-red-500"
             );
+
+
+            boton.disabled = false;
+
+            boton.textContent =
+                "Intentar nuevamente";
         }
     }
-
 
 
 
