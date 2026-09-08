@@ -72,10 +72,43 @@ public class SecurityConfig {
                                                  * Dashboard únicamente ADMIN
                                                  */
 
+                                                /*
+                                                 * =====================================================
+                                                 * ZONA ADMINISTRATIVA
+                                                 * =====================================================
+                                                 *
+                                                 * Únicamente ADMIN puede administrar:
+                                                 * - Dashboard
+                                                 * - Usuarios
+                                                 * - Máquinas
+                                                 * - Piezas
+                                                 */
+
                                                 .requestMatchers(
                                                                 "/",
-                                                                "/dashboard/**")
+                                                                "/dashboard/**",
+                                                                "/usuarios/**",
+                                                                "/maquinas/**",
+                                                                "/piezas/**")
                                                 .hasRole("ADMIN")
+
+                                                /*
+                                                 * =====================================================
+                                                 * ZONA OPERATIVA
+                                                 * =====================================================
+                                                 *
+                                                 * Los tres roles pueden utilizar
+                                                 * el scanner desde el móvil.
+                                                 */
+
+                                                .requestMatchers(
+                                                                "/scanner/**",
+                                                                "/api/piezas/qr/**",
+                                                                "/acceso-movil")
+                                                .hasAnyRole(
+                                                                "ADMIN",
+                                                                "SUPERVISOR",
+                                                                "TECNICO")
 
                                                 /*
                                                  * Todo lo demás requiere sesión
