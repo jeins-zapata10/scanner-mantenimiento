@@ -44,6 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("maquinaUbicacion");
 
     const confirmacion = document.getElementById("scannerConfirmacion");
+    const marcoQr = document.getElementById("scannerMarcoQr");
 
 
 
@@ -273,6 +274,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return valor;
     }
 
+
     /*
      * =========================================================
      * ESPERAR PROCESAMIENTO
@@ -281,11 +283,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function esperar(milisegundos) {
         return new Promise(
-            resposive => setTimeout(resolve, milisegundos)
+            resolve => setTimeout(
+                resolve, 
+                milisegundos)
         );
     }
-
-
 
 
     /*
@@ -298,6 +300,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         detenerCamara();
 
+        placeholder.classList.add("hidden");
+        marcoQr.classList.add("hidden");
+
 
         /*
          * =====================================================
@@ -308,6 +313,8 @@ document.addEventListener("DOMContentLoaded", () => {
         confirmacion.classList.remove(
             "hidden"
         );
+        placeholder.classList.add("hidden");
+        marcoQr.classList.add("hidden");
 
         piezaResultado.classList.add(
             "hidden",
@@ -443,6 +450,8 @@ document.addEventListener("DOMContentLoaded", () => {
             confirmacion.classList.add(
                 "hidden"
             );
+            placeholder.classList.remove("hidden");
+            marcoQr.classList.remove("hidden")
 
 
             /*
