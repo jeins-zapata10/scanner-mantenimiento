@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layouts/main :: head}">
+</head>
+
+
+<body class="min-h-[100dvh]
+             bg-gray-100
+             dark:bg-gray-950
+             text-gray-800
+             dark:text-gray-100">
+
+
+    <main class="min-h-[100dvh]
+                 flex
+                 items-center
+                 justify-center
+                 px-5
+                 py-8">
+
+
+        <div class="w-full
+                    max-w-md
+                    text-center">
+
+
+            <!-- ICONO -->
+
+            <div class="w-24
+                        h-24
+                        mx-auto
+                        rounded-3xl
+                        bg-violet-600
+                        flex
+                        items-center
+                        justify-center
+                        shadow-lg
+                        shadow-violet-600/20">
+
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.8" class="w-12
+                            h-12
+                            text-white">
+
+                    <rect x="7" y="2" width="10" height="20" rx="2" />
+
+                    <path d="M11 18h2" />
+
+                </svg>
+
+            </div>
+
+
+            <!-- TÍTULO -->
+
+            <p class="mt-6
+                      text-sm
+                      uppercase
+                      tracking-[0.25em]
+                      font-semibold
+                      text-violet-600
+                      dark:text-violet-400">
+
+                ScannerCP
+
+            </p>
+
+
+            <h1 class="text-2xl
+                       font-bold
+                       mt-3">
+
+                Acceso desde celular requerido
+
+            </h1>
+
+
+            <p class="text-sm
+                      text-gray-500
+                      dark:text-gray-400
+                      mt-3
+                      leading-relaxed">
+
+                Esta cuenta está destinada al trabajo
+                de campo mediante el escaneo de códigos QR.
+
+            </p>
+
+
+            <!-- TARJETA -->
+
+            <div class="mt-8
+                        rounded-3xl
+                        border
+                        border-gray-200
+                        dark:border-gray-800
+                        bg-white
+                        dark:bg-gray-900
+                        p-6
+                        shadow-xl">
+
+
+                <div class="w-14
+                            h-14
+                            mx-auto
+                            rounded-2xl
+                            bg-violet-100
+                            dark:bg-violet-500/20
+                            flex
+                            items-center
+                            justify-center">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" class="w-7
+                                h-7
+                                text-violet-600
+                                dark:text-violet-400">
+
+                        <path d="M3 7V5a2 2 0 0 1 2-2h2" />
+                        <path d="M17 3h2a2 2 0 0 1 2 2v2" />
+                        <path d="M21 17v2a2 2 0 0 1-2 2h-2" />
+                        <path d="M7 21H5a2 2 0 0 1-2-2v-2" />
+                        <path d="M7 12h10" />
+
+                    </svg>
+
+                </div>
+
+
+                <h2 class="font-semibold
+                           mt-4">
+
+                    Continúa desde tu celular
+
+                </h2>
+
+
+                <p class="text-sm
+                          text-gray-500
+                          dark:text-gray-400
+                          mt-2
+                          leading-relaxed">
+
+                    Abre ScannerCP desde tu dispositivo móvil
+                    e inicia sesión con las mismas credenciales.
+
+                </p>
+
+
+                <!-- CERRAR SESIÓN -->
+
+                <form th:action="@{/logout}" method="post" class="mt-6">
+
+                    <button type="submit" class="w-full
+                                   rounded-xl
+                                   border
+                                   border-gray-300
+                                   dark:border-gray-700
+                                   px-5
+                                   py-3.5
+                                   font-semibold
+                                   hover:bg-gray-50
+                                   dark:hover:bg-gray-800
+                                   transition">
+
+                        Cerrar sesión
+
+                    </button>
+
+                </form>
+
+            </div>
+
+
+            <p class="text-xs
+                      text-gray-400
+                      mt-7">
+
+                Sistema de gestión de mantenimiento
+
+            </p>
+
+        </div>
+
+    </main>
+
+
+</body>
+
+</html>

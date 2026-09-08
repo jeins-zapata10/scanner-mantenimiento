@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layouts/main :: head}">
+</head>
+
+
+<body class="min-h-[100dvh]
+             bg-gray-100
+             dark:bg-gray-950
+             text-gray-800
+             dark:text-gray-100">
+
+
+    <!-- =====================================================
+         CONTENEDOR GENERAL
+    ====================================================== -->
+
+    <main class="min-h-[100dvh]
+                 flex
+                 items-center
+                 justify-center
+                 px-5
+                 py-8">
+
+
+        <div class="w-full
+                    max-w-md">
+
+
+            <!-- =================================================
+                 IDENTIDAD
+            ================================================== -->
+
+            <div class="text-center
+                        mb-8">
+
+
+                <!-- LOGO -->
+
+                <div class="w-20
+                            h-20
+                            mx-auto
+                            rounded-3xl
+                            bg-violet-600
+                            flex
+                            items-center
+                            justify-center
+                            shadow-lg
+                            shadow-violet-600/20">
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8" class="w-10
+                                h-10
+                                text-white">
+
+                        <path d="M3 7V5a2 2 0 0 1 2-2h2" />
+                        <path d="M17 3h2a2 2 0 0 1 2 2v2" />
+                        <path d="M21 17v2a2 2 0 0 1-2 2h-2" />
+                        <path d="M7 21H5a2 2 0 0 1-2-2v-2" />
+
+                        <rect x="7" y="7" width="3" height="3" />
+
+                        <rect x="14" y="7" width="3" height="3" />
+
+                        <rect x="7" y="14" width="3" height="3" />
+
+                        <path d="M14 14h1v1h-1z" />
+                        <path d="M17 14v3h-3" />
+
+                    </svg>
+
+                </div>
+
+
+                <!-- NOMBRE -->
+
+                <p class="mt-5
+                          text-sm
+                          uppercase
+                          tracking-[0.25em]
+                          font-semibold
+                          text-violet-600
+                          dark:text-violet-400">
+
+                    ScannerCP
+
+                </p>
+
+
+                <h1 class="text-2xl
+                           font-bold
+                           mt-2">
+
+                    Bienvenido
+
+                </h1>
+
+
+                <p class="text-sm
+                          text-gray-500
+                          dark:text-gray-400
+                          mt-2">
+
+                    Ingresa tus credenciales para continuar.
+
+                </p>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 TARJETA LOGIN
+            ================================================== -->
+
+            <div class="bg-white
+                        dark:bg-gray-900
+                        rounded-3xl
+                        border
+                        border-gray-200
+                        dark:border-gray-800
+                        shadow-xl
+                        p-6">
+
+
+                <form method="post" action="/login" class="space-y-5">
+
+
+                    <!-- =========================================
+                         CORREO
+                    ========================================== -->
+
+                    <div>
+
+                        <label for="username" class="block
+                                      text-sm
+                                      font-medium
+                                      mb-2">
+
+                            Correo electrónico
+
+                        </label>
+
+
+                        <div class="relative">
+
+
+                            <div class="absolute
+                                        inset-y-0
+                                        left-0
+                                        pl-4
+                                        flex
+                                        items-center
+                                        pointer-events-none">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="1.8" class="w-5
+                                            h-5
+                                            text-gray-400">
+
+                                    <path d="M4 4h16v16H4z" />
+                                    <path d="m4 6 8 6 8-6" />
+
+                                </svg>
+
+                            </div>
+
+
+                            <input id="username" name="username" type="email" autocomplete="email" required
+                                placeholder="usuario@empresa.com" class="w-full
+                                          rounded-xl
+                                          border
+                                          border-gray-300
+                                          dark:border-gray-700
+                                          bg-white
+                                          dark:bg-gray-950
+                                          pl-12
+                                          pr-4
+                                          py-3.5
+                                          outline-none
+                                          focus:ring-2
+                                          focus:ring-violet-500
+                                          focus:border-violet-500
+                                          transition">
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =========================================
+                         CONTRASEÑA
+                    ========================================== -->
+
+                    <div>
+
+                        <label for="password" class="block
+                                      text-sm
+                                      font-medium
+                                      mb-2">
+
+                            Contraseña
+
+                        </label>
+
+
+                        <div class="relative">
+
+
+                            <div class="absolute
+                                        inset-y-0
+                                        left-0
+                                        pl-4
+                                        flex
+                                        items-center
+                                        pointer-events-none">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="1.8" class="w-5
+                                            h-5
+                                            text-gray-400">
+
+                                    <rect x="5" y="10" width="14" height="10" rx="2" />
+
+                                    <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+
+                                </svg>
+
+                            </div>
+
+
+                            <input id="password" name="password" type="password" autocomplete="current-password"
+                                required placeholder="Ingresa tu contraseña" class="w-full
+                                          rounded-xl
+                                          border
+                                          border-gray-300
+                                          dark:border-gray-700
+                                          bg-white
+                                          dark:bg-gray-950
+                                          pl-12
+                                          pr-4
+                                          py-3.5
+                                          outline-none
+                                          focus:ring-2
+                                          focus:ring-violet-500
+                                          focus:border-violet-500
+                                          transition">
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =========================================
+                         MENSAJES PARA SPRING SECURITY
+                    ========================================== -->
+
+                    <div th:if="${param.error}" class="rounded-xl
+                                bg-red-50
+                                dark:bg-red-500/10
+                                border
+                                border-red-200
+                                dark:border-red-500/20
+                                px-4
+                                py-3">
+
+                        <p class="text-sm
+                                  text-red-700
+                                  dark:text-red-400">
+
+                            Correo o contraseña incorrectos.
+
+                        </p>
+
+                    </div>
+
+
+                    <div th:if="${param.logout}" class="rounded-xl
+                                bg-green-50
+                                dark:bg-green-500/10
+                                border
+                                border-green-200
+                                dark:border-green-500/20
+                                px-4
+                                py-3">
+
+                        <p class="text-sm
+                                  text-green-700
+                                  dark:text-green-400">
+
+                            Sesión cerrada correctamente.
+
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- =========================================
+                         BOTÓN
+                    ========================================== -->
+
+                    <button type="submit" class="w-full
+                                   inline-flex
+                                   items-center
+                                   justify-center
+                                   gap-2
+                                   rounded-xl
+                                   bg-violet-600
+                                   hover:bg-violet-700
+                                   px-5
+                                   py-4
+                                   text-white
+                                   font-semibold
+                                   transition
+                                   shadow-lg
+                                   shadow-violet-600/20">
+
+                        Iniciar sesión
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" class="w-5 h-5">
+
+                            <path d="M5 12h14" />
+                            <path d="m13 6 6 6-6 6" />
+
+                        </svg>
+
+                    </button>
+
+
+                </form>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 INFORMACIÓN INFERIOR
+            ================================================== -->
+
+            <div class="text-center
+                        mt-7">
+
+
+                <p class="text-xs
+                          text-gray-400">
+
+                    Sistema de gestión de mantenimiento
+
+                </p>
+
+
+                <p class="text-xs
+                          text-gray-500
+                          dark:text-gray-500
+                          mt-1">
+
+                    ScannerCP
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+</body>
+
+</html>
