@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layouts/main :: head}">
+</head>
+
+<body class="min-h-[100dvh]
+             bg-gray-100
+             dark:bg-gray-950
+             text-gray-800
+             dark:text-gray-100">
+
+
+    <main class="min-h-[100dvh]
+             flex
+             justify-center">
+
+        <div class="w-full
+                max-w-md
+                min-h-[100dvh]
+                bg-white
+                dark:bg-gray-900
+                shadow-xl
+                flex
+                flex-col">
+
+
+            <!-- =====================================================
+             HEADER
+        ====================================================== -->
+
+            <header class="px-5
+                       py-5
+                       border-b
+                       border-gray-200
+                       dark:border-gray-800">
+
+                <div class="flex
+                        items-center
+                        gap-4">
+
+                    <a th:href="@{/scanner}" class="w-10
+                          h-10
+                          rounded-full
+                          border
+                          border-gray-200
+                          dark:border-gray-700
+                          flex
+                          items-center
+                          justify-center">
+
+                        ←
+
+                    </a>
+
+                    <div>
+
+                        <p class="text-xs
+                              uppercase
+                              tracking-wider
+                              text-violet-600
+                              dark:text-violet-400
+                              font-semibold">
+
+                            ScannerCP
+
+                        </p>
+
+                        <h1 class="text-xl
+                               font-bold
+                               mt-1">
+
+                            Nueva inspección
+
+                        </h1>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- =====================================================
+             CONTENIDO
+        ====================================================== -->
+
+            <section class="flex-1
+                        px-5
+                        py-6">
+
+
+                <!-- =================================================
+                 PIEZA
+            ================================================== -->
+
+                <div class="rounded-2xl
+                        border
+                        border-gray-200
+                        dark:border-gray-800
+                        overflow-hidden
+                        mb-6">
+
+                    <div class="px-5
+                            py-4
+                            bg-violet-50
+                            dark:bg-violet-500/10">
+
+                        <p class="text-xs
+                              uppercase
+                              tracking-wide
+                              font-semibold
+                              text-violet-600
+                              dark:text-violet-400">
+
+                            Pieza a inspeccionar
+
+                        </p>
+
+                        <h2 class="text-xl
+                               font-bold
+                               mt-1" th:text="${pieza.nombre}">
+
+                            Nombre de la pieza
+
+                        </h2>
+
+                        <p class="text-sm
+                              text-gray-500
+                              dark:text-gray-400
+                              mt-1" th:text="${pieza.codigo}">
+
+                            Código
+
+                        </p>
+
+                    </div>
+
+
+                    <div class="p-5">
+
+                        <div class="grid
+                                grid-cols-2
+                                gap-5">
+
+
+                            <!-- MÁQUINA -->
+
+                            <div class="col-span-2">
+
+                                <p class="text-xs
+                                      uppercase
+                                      tracking-wide
+                                      text-gray-400">
+
+                                    Máquina
+
+                                </p>
+
+                                <p class="font-semibold
+                                      mt-1" th:text="${pieza.maquina.nombre}">
+
+                                    Máquina
+
+                                </p>
+
+                                <p class="text-xs
+                                      text-gray-500
+                                      dark:text-gray-400
+                                      mt-1" th:text="${pieza.maquina.codigo}">
+
+                                    Código máquina
+
+                                </p>
+
+                            </div>
+
+
+                            <!-- UBICACIÓN PIEZA -->
+
+                            <div>
+
+                                <p class="text-xs
+                                      uppercase
+                                      tracking-wide
+                                      text-gray-400">
+
+                                    Ubicación pieza
+
+                                </p>
+
+                                <p class="text-sm
+                                      mt-1" th:text="${pieza.ubicacion != null
+                                    ? pieza.ubicacion
+                                    : 'Sin registro'}">
+
+                                    Sin registro
+
+                                </p>
+
+                            </div>
+
+
+                            <!-- ÁREA -->
+
+                            <div>
+
+                                <p class="text-xs
+                                      uppercase
+                                      tracking-wide
+                                      text-gray-400">
+
+                                    Área
+
+                                </p>
+
+                                <p class="text-sm
+                                      mt-1" th:text="${pieza.maquina.area != null
+                                    ? pieza.maquina.area
+                                    : 'Sin registro'}">
+
+                                    Sin registro
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                 ERROR GENERAL
+            ================================================== -->
+
+                <div th:if="${error}" class="mb-6
+                        p-4
+                        rounded-xl
+                        bg-red-50
+                        dark:bg-red-500/10
+                        text-red-700
+                        dark:text-red-400
+                        text-sm" th:text="${error}">
+                </div>
+
+
+                <!-- =================================================
+                 FORMULARIO
+            ================================================== -->
+
+                <form th:action="@{/inspecciones/nueva/{idPieza}
+                    (idPieza=${pieza.idPieza})}" th:object="${inspeccionForm}" method="post" novalidate>
+
+
+                    <!-- OBSERVACIÓN -->
+
+                    <div class="mb-6">
+
+                        <label for="observacion" class="block
+                                  text-sm
+                                  font-medium
+                                  mb-2">
+
+                            Observación
+
+                        </label>
+
+                        <textarea id="observacion" th:field="*{observacion}" rows="5"
+                            placeholder="Describe el estado actual de la pieza..." class="w-full
+                                     rounded-xl
+                                     border
+                                     border-gray-300
+                                     dark:border-gray-700
+                                     dark:bg-gray-900
+                                     px-4
+                                     py-3
+                                     outline-none
+                                     resize-y
+                                     focus:border-violet-500">
+                    </textarea>
+
+                    </div>
+
+
+                    <!-- =================================================
+                     REQUIERE MANTENIMIENTO
+                ================================================== -->
+
+                    <div class="mb-6">
+
+                        <p class="text-sm
+                              font-medium
+                              mb-3">
+
+                            ¿La pieza requiere mantenimiento?
+
+                        </p>
+
+
+                        <div class="grid
+                                grid-cols-2
+                                gap-3">
+
+
+                            <!-- NO -->
+
+                            <label class="rounded-xl
+                                      border
+                                      border-gray-300
+                                      dark:border-gray-700
+                                      p-4
+                                      cursor-pointer">
+
+                                <div class="flex
+                                        items-center
+                                        gap-3">
+
+                                    <input type="radio" th:field="*{requiereMantenimiento}" value="false"
+                                        class="w-4 h-4">
+
+                                    <div>
+
+                                        <p class="font-semibold">
+
+                                            No
+
+                                        </p>
+
+                                        <p class="text-xs
+                                              text-gray-400
+                                              mt-1">
+
+                                            Pieza correcta
+
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+                            </label>
+
+
+                            <!-- SÍ -->
+
+                            <label class="rounded-xl
+                                      border
+                                      border-gray-300
+                                      dark:border-gray-700
+                                      p-4
+                                      cursor-pointer">
+
+                                <div class="flex
+                                        items-center
+                                        gap-3">
+
+                                    <input type="radio" th:field="*{requiereMantenimiento}" value="true"
+                                        class="w-4 h-4">
+
+                                    <div>
+
+                                        <p class="font-semibold">
+
+                                            Sí
+
+                                        </p>
+
+                                        <p class="text-xs
+                                              text-gray-400
+                                              mt-1">
+
+                                            Requiere atención
+
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+                            </label>
+
+                        </div>
+
+
+                        <p th:if="${#fields.hasErrors('requiereMantenimiento')}" th:errors="*{requiereMantenimiento}"
+                            class="text-red-500
+                              text-xs
+                              mt-2">
+                        </p>
+
+                    </div>
+
+
+                    <!-- =================================================
+                     PRIORIDAD
+                ================================================== -->
+
+                    <div id="contenedorPrioridad" class="hidden
+                            mb-6">
+
+                        <label for="prioridad" class="block
+                                  text-sm
+                                  font-medium
+                                  mb-2">
+
+                            Prioridad del mantenimiento
+
+                        </label>
+
+
+                        <select id="prioridad" th:field="*{prioridad}" class="w-full
+                                   rounded-xl
+                                   border
+                                   border-gray-300
+                                   dark:border-gray-700
+                                   dark:bg-gray-900
+                                   px-4
+                                   py-3
+                                   outline-none
+                                   focus:border-violet-500">
+
+                            <option value="">
+
+                                Selecciona una prioridad
+
+                            </option>
+
+                            <option th:each="prioridad : ${prioridades}" th:value="${prioridad}" th:text="${prioridad}">
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- =================================================
+                     INFORMACIÓN
+                ================================================== -->
+
+                    <div class="p-4
+                            rounded-xl
+                            bg-gray-50
+                            dark:bg-gray-800
+                            mb-6">
+
+                        <p class="text-sm
+                              font-medium">
+
+                            Registro de inspección
+
+                        </p>
+
+                        <p class="text-xs
+                              text-gray-400
+                              mt-1">
+
+                            La inspección quedará asociada automáticamente
+                            al usuario que tiene la sesión iniciada.
+
+                        </p>
+
+                    </div>
+
+
+                    <!-- =================================================
+                     BOTONES
+                ================================================== -->
+
+                    <div class="flex
+                            flex-col
+                            gap-3">
+
+                        <button type="submit" class="w-full
+                                   px-5
+                                   py-4
+                                   rounded-xl
+                                   bg-green-600
+                                   hover:bg-green-700
+                                   text-white
+                                   font-semibold">
+
+                            Guardar inspección
+
+                        </button>
+
+
+                        <a th:href="@{/scanner}" class="w-full
+                              px-5
+                              py-3
+                              rounded-xl
+                              border
+                              border-gray-300
+                              dark:border-gray-700
+                              text-center">
+
+                            Cancelar
+
+                        </a>
+
+                    </div>
+
+                </form>
+
+            </section>
+
+
+            <!-- =====================================================
+             FOOTER
+        ====================================================== -->
+
+            <footer class="px-5
+                       py-4
+                       border-t
+                       border-gray-200
+                       dark:border-gray-800
+                       text-center">
+
+                <p class="text-xs
+                      text-gray-400">
+
+                    Sistema de mantenimiento ScannerCP
+
+                </p>
+
+            </footer>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================================================
+     MOSTRAR / OCULTAR PRIORIDAD
+========================================================== -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const opciones =
+                    document.querySelectorAll(
+                        'input[name="requiereMantenimiento"]'
+                    );
+
+                const contenedorPrioridad =
+                    document.getElementById(
+                        "contenedorPrioridad"
+                    );
+
+                const prioridad =
+                    document.getElementById(
+                        "prioridad"
+                    );
+
+
+                function actualizarPrioridad() {
+
+                    const seleccionada =
+                        document.querySelector(
+                            'input[name="requiereMantenimiento"]:checked'
+                        );
+
+
+                    if (
+                        seleccionada &&
+                        seleccionada.value === "true"
+                    ) {
+
+                        contenedorPrioridad
+                            .classList
+                            .remove("hidden");
+
+                    } else {
+
+                        contenedorPrioridad
+                            .classList
+                            .add("hidden");
+
+                        prioridad.value = "";
+
+                    }
+
+                }
+
+
+                opciones.forEach(
+                    function (opcion) {
+
+                        opcion.addEventListener(
+                            "change",
+                            actualizarPrioridad
+                        );
+
+                    }
+                );
+
+
+                actualizarPrioridad();
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

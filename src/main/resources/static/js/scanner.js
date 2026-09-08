@@ -45,6 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const confirmacion = document.getElementById("scannerConfirmacion");
     const marcoQr = document.getElementById("scannerMarcoQr");
+    const btnIniciarInpeccion = document.getElementById("btnIniciarInspeccion");
 
 
 
@@ -64,6 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let escaneando = false;
     let detector = null;
     let detectandoFrame = false;
+    let idPiezaSeleccionada = null;
 
 
     /*
@@ -284,7 +286,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function esperar(milisegundos) {
         return new Promise(
             resolve => setTimeout(
-                resolve, 
+                resolve,
                 milisegundos)
         );
     }
@@ -393,6 +395,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const pieza =
                 await respuesta.json();
 
+            idPiezaSeleccionada = pieza.idPieza;
+
 
             /*
              * =====================================================
@@ -490,6 +494,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         } catch (error) {
 
+            idPiezaSeleccionada = null;
+
             console.error(
                 "Error consultando la pieza:",
                 error
@@ -531,6 +537,31 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
+
+
+    /*
+ * =========================================================
+ * INICIAR INSPECCIÓN
+ * =========================================================
+ */
+
+    btnIniciarInspeccion.addEventListener(
+        "click",
+        () => {
+
+            if (!idPiezaSeleccionada) {
+
+                console.error(
+                    "No hay una pieza seleccionada"
+                );
+
+                return;
+            }
+
+            window.location.href =
+                `/inspecciones/nueva/${idPiezaSeleccionada}`;
+        }
+    );
 
 
     /*
